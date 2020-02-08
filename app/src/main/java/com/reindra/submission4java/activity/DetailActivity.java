@@ -17,3 +17,6 @@
         date = findViewById(R.id.tv_year);
         rate = findViewById(R.id.tv_score_detail);
         poster = findViewById(R.id.iv_poster_detail);
+        movie = getIntent().getParcelableExtra(FLAG_EXTRA);
+        movieHelper = MovieHelper.getInstance(getApplicationContext());
+        movieHelper.open();
