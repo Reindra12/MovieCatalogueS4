@@ -1,3 +1,23 @@
+package com.reindra.submission4java.activity;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.reindra.submission4java.R;
+import com.reindra.submission4java.database.MovieHelper;
+import com.reindra.submission4java.model.Movie;
+
+public class DetailActivity extends AppCompatActivity {
     public static String FLAG_EXTRA = "flag_extra";
     ProgressBar progressBar;
     Movie movie = new Movie();
@@ -17,9 +37,11 @@
         date = findViewById(R.id.tv_year);
         rate = findViewById(R.id.tv_score_detail);
         poster = findViewById(R.id.iv_poster_detail);
+
         movie = getIntent().getParcelableExtra(FLAG_EXTRA);
         movieHelper = MovieHelper.getInstance(getApplicationContext());
         movieHelper.open();
+
         showloading(true);
         if (movie != null) {
             title.setText(movie.getTitle());
@@ -32,6 +54,15 @@
             showloading(false);
         }
     }
+
+    private void showloading(boolean b) {
+        if (b) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.fav_menu, menu);
@@ -45,6 +76,8 @@
         }
         return super.onPrepareOptionsMenu(menu);
     }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
             if (item.getItemId() == android.R.id.home) {
                 finish();
@@ -83,3 +116,4 @@
         movieHelper.close();
     }
 }
+
