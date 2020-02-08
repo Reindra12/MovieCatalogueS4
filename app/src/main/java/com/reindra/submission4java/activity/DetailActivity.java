@@ -20,3 +20,15 @@
         movie = getIntent().getParcelableExtra(FLAG_EXTRA);
         movieHelper = MovieHelper.getInstance(getApplicationContext());
         movieHelper.open();
+        showloading(true);
+        if (movie != null) {
+            title.setText(movie.getTitle());
+            date.setText(movie.getDate());
+            rate.setText(movie.getRating());
+            overview.setText(movie.getOverview());
+            Glide.with(this)
+                    .load(movie.getPhoto())
+                    .into(poster);
+            showloading(false);
+        }
+    }
