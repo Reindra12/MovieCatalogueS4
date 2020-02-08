@@ -32,3 +32,16 @@
             showloading(false);
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fav_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (movieHelper.getAll(movie.getId())) {
+            menu.findItem(R.id.menu_favorite).setIcon(R.drawable.ic_favorite);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
