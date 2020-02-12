@@ -107,6 +107,14 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "failed add item", Toast.LENGTH_SHORT).show();
+        private void addItemToFavorite () {
+            long result = movieHelper.insert(this.movie);
+            if (result > 0) {
+                Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(this, "failed add item", Toast.LENGTH_SHORT).show();
+            }
+        }
         }
     }
 
