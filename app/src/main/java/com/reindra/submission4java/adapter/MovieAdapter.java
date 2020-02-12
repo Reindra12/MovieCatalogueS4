@@ -60,21 +60,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.ic_missing)
                 .into(holder.imgPhoto);
+
+
         holder.title.setText(moviesItems.getTitle());
         holder.overview.setText(moviesItems.getOverview());
         holder.date.setText(moviesItems.getDate());
         holder.county.setText(moviesItems.getCountry());
-        holder.rating.setText(moviesItems.getRating());
-//        holder.idmovie.setText(items.getId());
+        Float pa = Float.parseFloat(moviesItems.getRating());
+        pa = Float.valueOf(pa * 10);
+        holder.rating.setText(String.format("%s%%", pa.intValue()));
+        holder.ratingBar.setRating(pa / 20f);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClickCallBack.onItemClicked(mData.get(holder.getAdapterPosition()));
+
             }
+
         });
-
-
     }
 
     @Override
