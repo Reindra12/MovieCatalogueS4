@@ -92,7 +92,9 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteItem() {
+    }*/
+
+        private void deleteItem () {
             int result = movieHelper.delete(movie.getId());
             if (result > 0) {
                 Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
