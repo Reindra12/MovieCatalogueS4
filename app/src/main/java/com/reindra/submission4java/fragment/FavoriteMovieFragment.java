@@ -31,4 +31,7 @@ public class FavoriteMovieFragment extends Fragment {
         return textView;
     }
 
+        LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(movieAdapter);
 }
