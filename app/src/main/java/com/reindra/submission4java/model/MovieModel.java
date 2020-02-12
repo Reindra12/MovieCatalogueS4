@@ -38,7 +38,7 @@ public class MovieModel extends ViewModel {
                         items.setId(movie.getInt("id"));
                         items.setTitle(movie.getString("title"));
                         items.setDate(movie.getString("release_date"));
-                        items.setRating(movie.getString("popularity"));
+                        items.setRating(movie.getString("vote_average"));
                         items.setCountry(movie.getString("original_language"));
                         items.setOverview(movie.getString("overview"));
                         items.setPhoto("https://image.tmdb.org/t/p/w185" + movie.getString("poster_path"));
