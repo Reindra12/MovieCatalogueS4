@@ -90,11 +90,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView title;
         TextView date;
         TextView id;
+        Integer idint;
         TextView overview;
         TextView rating;
         TextView county;
-        ImageView imgPhoto;
+        ImageView imgPhoto, favorite;
         CardView cardView;
+        RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,11 +108,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             rating = itemView.findViewById(R.id.tv_score_movie);
             county = itemView.findViewById(R.id.tv_country);
             cardView = itemView.findViewById(R.id.cv_item_movie);
-
-
-
-
-
+            ratingBar = itemView.findViewById(R.id.rb_score_movie);
 
         }
     }
