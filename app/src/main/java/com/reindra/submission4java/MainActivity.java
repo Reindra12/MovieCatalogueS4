@@ -12,19 +12,25 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.reindra.submission4java.fragment.FavoriteFragment;
 
 public class MainActivity extends AppCompatActivity {
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        setActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+//        toolbar = findViewById(R.id.toolbarmain);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_movies, R.id.navigation_tv_show, R.id.navigation_favorite)
+                R.id.navigation_movies, R.id.navigation_tv_show, R.id.navigation_favorite, R.id.navigation_setting)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
