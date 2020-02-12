@@ -59,7 +59,7 @@ public class MovieHelper {
                 null,
                 null,
                 null,
-                _ID + "ASC",
+                _ID + " ASC",
                 null);
         cursor.moveToFirst();
         Movie movie;

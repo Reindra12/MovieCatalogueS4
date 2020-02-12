@@ -36,12 +36,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
-            DatabaseContract.TABLE_TV_SHOW,
+            DatabaseContract.TABLE_TV,
             DatabaseContract.TvShowColumns._ID,
             DatabaseContract.TvShowColumns.TITLE,
             DatabaseContract.TvShowColumns.OVERVIEW,
-            DatabaseContract.TvShowColumns.PHOTO
+            DatabaseContract.TvShowColumns.PHOTO,
+            DatabaseContract.TvShowColumns.RATING,
+            DatabaseContract.TvShowColumns.DATE
     );
 
     public DatabaseHelper(Context context) {
@@ -57,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_MOVIES);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_TV_SHOW);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_TV);
         onCreate(db);
     }
 }
