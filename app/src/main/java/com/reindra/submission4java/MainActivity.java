@@ -45,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.setting) {
+        if (item.getItemId() == R.id.navigation_setting) {
             Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(intent);
-        }
+
+        }/*else if(item.getItemId() == R.id.menu_favorite){
+            Intent intent1 = new Intent (this, FavoriteFragment.class);
+            startActivity(intent1);
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
