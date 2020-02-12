@@ -34,4 +34,18 @@ public class FavoriteMovieFragment extends Fragment {
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(movieAdapter);
+        movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
+            @Override
+            public void onItemClicked(Movie data) {
+                SelectedDataMovie(data);
+            }
+        });
+        movieHelper.close();
+    }
+
+    private void SelectedDataMovie(Movie movie) {
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(DetailActivity.FLAG_EXTRA, movie);
+        startActivity(intent);
+    }
 }
