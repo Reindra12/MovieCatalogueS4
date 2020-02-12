@@ -53,6 +53,18 @@ public class DetailActivity extends AppCompatActivity {
                     .into(poster);
             showloading(false);
         }
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (!movieHelper.getAll(movie.getId())) {
+                   favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+                   addItemToFavorite();
+               }else{
+                   favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+                   deleteItem();
+               }
+            }
+        });
     }
 
     private void showloading(boolean b) {
