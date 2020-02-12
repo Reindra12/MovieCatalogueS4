@@ -1,9 +1,11 @@
 package com.reindra.submission4java.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import com.reindra.submission4java.R;
 import com.reindra.submission4java.model.Movie;
 
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -80,6 +84,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         });
     }
+
 
     @Override
     public int getItemCount() {
