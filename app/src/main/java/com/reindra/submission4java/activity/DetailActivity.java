@@ -114,6 +114,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         movieHelper.close();
+        overridePendingTransition(R.anim.godown, R.anim.godown);
     }
 }
 
