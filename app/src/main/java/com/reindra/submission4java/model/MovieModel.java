@@ -15,8 +15,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.reindra.submission4java.BuildConfig.API_KEY;
-
 public class MovieModel extends ViewModel {
     private static final String API_KEY = BuildConfig.API_KEY;
     private MutableLiveData<ArrayList<Movie>> ListMovies = new MutableLiveData<>();
@@ -65,7 +63,6 @@ public class MovieModel extends ViewModel {
 
     }
 
-}
     public void setTV() {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItems = new ArrayList<>();
