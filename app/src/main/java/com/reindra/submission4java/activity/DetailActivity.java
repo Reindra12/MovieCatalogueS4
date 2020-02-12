@@ -46,12 +46,21 @@ public class DetailActivity extends AppCompatActivity {
         if (movie != null) {
             title.setText(movie.getTitle());
             date.setText(movie.getDate());
-            rate.setText(movie.getRating());
+            Float count = Float.parseFloat(movie.getRating());
+            count = Float.valueOf(count * 10);
+            rate.setText(String.format("%s%%", count.intValue()));
+            ratingbar.setRating(count / 20f);
             overview.setText(movie.getOverview());
+            tvCountry.setText(movie.getCountry());
             Glide.with(this)
                     .load(movie.getPhoto())
                     .into(poster);
             showloading(false);
+
+            if (movieHelper.getAll(movie.getId())) {
+                favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+                addItemToFavorite();
+            }
         }
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
