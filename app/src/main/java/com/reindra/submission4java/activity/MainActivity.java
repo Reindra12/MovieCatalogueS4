@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgsetting:
-                Intent intent = new Intent (Settings.ACTION_LOCALE_SETTINGS);
+                Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
                 startActivity(intent);
                 break;
         }
