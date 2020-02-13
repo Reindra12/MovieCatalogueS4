@@ -129,6 +129,22 @@ public class DetailActivity extends AppCompatActivity {
 
         }
         return super.onPrepareOptionsMenu(menu);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DetailActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
+            }
+        });
+        btnalert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+                addItemToFavorite();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
