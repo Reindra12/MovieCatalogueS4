@@ -8,14 +8,14 @@ public class DatabaseContract {
 
     public static final class MoviesColumns implements BaseColumns {
         public static String TITLE = "title";
-        public static String DATE = "date";
-        public static String PHOTO = "photo";
+        public static String YEAR = "date";
+        public static String POSTER = "photo";
         public static String RATING = "rating";
         public static String OVERVIEW = "overview";
         public static String COUNTRY = "country";
     }
 
-    public static final class TvShowColumns implements BaseColumns {
+    public static final class TVColumns implements BaseColumns {
         public static String TITLE = "title";
         public static String OVERVIEW = "overview";
         public static String PHOTO = "photo";

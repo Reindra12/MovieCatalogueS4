@@ -19,7 +19,7 @@
             android:name=".activity.DetailActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

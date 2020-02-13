@@ -2,24 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_movies"
+        android:id="@+id/nav_movie"
         android:icon="@drawable/ic_movie_black_24dp"
         android:title="@string/tab_text_1" />
 
     <item
-        android:id="@+id/navigation_tv_show"
+        android:id="@+id/nav_tv"
         android:icon="@drawable/ic_videocam_black_24dp"
         android:title="@string/tab_text_2" />
 
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/nav_fav"
         android:icon="@drawable/ic_favorite"
+        android:iconTint="@color/title_text_color"
         android:title="@string/title_favorite" />
-
-    <item
-        android:id="@+id/navigation_setting"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/title_setting" />
 
 
 </menu>

@@ -25,7 +25,6 @@ public class Movie implements Parcelable {
     public Movie() {
     }
 
-
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel in) {
@@ -62,7 +61,6 @@ public class Movie implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getTitle() {
         return title;

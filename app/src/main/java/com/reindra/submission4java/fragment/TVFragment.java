@@ -3,7 +3,6 @@ package com.reindra.submission4java.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.reindra.submission4java.R;
-import com.reindra.submission4java.activity.DetailActivity;
 import com.reindra.submission4java.activity.TVDetailActivity;
 import com.reindra.submission4java.adapter.TVAdapter;
 import com.reindra.submission4java.model.Movie;
@@ -38,7 +36,6 @@ public class TVFragment extends Fragment {
     public TVFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,7 +90,7 @@ public class TVFragment extends Fragment {
     private void showSelectedMovie(Movie movie) {
         Intent intent = new Intent(getContext(), TVDetailActivity.class);
         intent.putExtra(TVDetailActivity.FLAG_EXTATV, movie);
-        intent.putExtra("status","tv");
+        intent.putExtra("status", "tv");
         startActivity(intent);
     }
 

@@ -21,49 +21,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_appbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/exo_bold"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            tools:text="@string/title" />
+    </androidx.appcompat.widget.Toolbar>
 
-            <TextView
-                android:id="@+id/toolbar_title_tv"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/exo_bold"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:orientation="horizontal"
-                android:singleLine="false"
-                android:textColor="@color/black" />
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.1"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_appbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,7 +71,8 @@
                 android:layout_marginBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_poster_detail"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                tools:ignore="UnknownIdInLayout" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/iv_poster_detailtv"
@@ -87,49 +83,36 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_placeholder"
-
-                android:transitionName="illusration"
                 app:layout_collapseMode="parallax"
                 app:layout_constraintBottom_toTopOf="@+id/tv_tittle_detail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/space_poster"
-                app:riv_corner_radius="5dp" />
+                app:riv_corner_radius="5dp"
+                tools:ignore="UnknownIdInLayout" />
 
             <TextView
                 android:id="@+id/tv_tittle_detailtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/exo_bold"
-                android:textColor="@color/black"
+                android:text="@string/title"
+                android:textColor="@color/colorAccent"
                 android:textSize="20sp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_poster_detailtv" />
 
             <TextView
-                android:id="@+id/tv_yeartv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/exo_bold"
-                android:maxLines="1"
-                android:textColor="@color/blackSoft"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_tittle_detailtv" />
-
-
-            <TextView
-                android:id="@+id/tv_score_tittletv"
+                android:id="@+id/tv_datetv"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_16dp"
-                android:layout_marginTop="@dimen/margin_padding_16dp"
                 android:fontFamily="@font/exo"
-                android:text="@string/score"
-                android:textColor="@color/blackSoft"
+                android:text="@string/rating"
+                android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_tittle_detailtv" />
@@ -141,16 +124,18 @@
                 android:layout_marginStart="@dimen/margin_padding_16dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/exo"
+                android:text="@string/score"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_score_tittletv" />
+                app:layout_constraintTop_toBottomOf="@id/tv_datetv" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/rb_scoretv"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:numStars="5"
                 android:rating="3.23"
                 android:stepSize="0"
@@ -158,44 +143,19 @@
                 app:layout_constraintBottom_toBottomOf="@id/tv_score_detailtv"
                 app:layout_constraintStart_toEndOf="@id/tv_score_detailtv" />
 
-            <LinearLayout
-                android:id="@+id/btn_favoritetv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="@dimen/margin_padding_8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_rounded_gradient"
-                android:backgroundTint="@color/colorBacground"
-                android:gravity="center_vertical|center_horizontal"
-
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_padding_8dp"
-                android:paddingTop="@dimen/margin_padding_4dp"
-                android:paddingEnd="@dimen/margin_padding_8dp"
-                android:paddingBottom="@dimen/margin_padding_4dp"
+            <ImageView
+                android:id="@+id/iv_hearttv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="32dp"
+                android:contentDescription="@string/desc_ic_heart"
+                android:src="@drawable/ic_favorite"
+                android:tint="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_score_tittletv">
-
-                <ImageView
-                    android:id="@+id/iv_hearttv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="2dp"
-                    android:contentDescription="@string/desc_ic_heart"
-                    android:src="@drawable/ic_favorite"
-                    android:tint="@color/grey" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/favorite"
-                    android:textColor="@color/blackSoft"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+                app:layout_constraintHorizontal_bias="0.924"
+                app:layout_constraintStart_toEndOf="@+id/rb_scoretv"
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster_detailtv" />
 
             <TextView
                 android:id="@+id/tv_country_detailtv"

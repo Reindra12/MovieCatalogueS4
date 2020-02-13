@@ -1,4 +1,4 @@
-package com.reindra.submission4java.fragment;
+package com.reindra.submission4java.fragment.favorite;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.reindra.submission4java.fragment;
+package com.reindra.submission4java.fragment.favorite;
 
 
 import android.content.Context;
@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteMovieFragment extends Fragment {
+public class FavMovieFragment extends Fragment {
     private RecyclerView recyclerView;
     private MovieHelper movieHelper;
     private ArrayList<Movie>ListMovie;
@@ -40,7 +40,7 @@ public class FavoriteMovieFragment extends Fragment {
     private LinearLayout nodata;
 
 
-    public FavoriteMovieFragment() {
+    public FavMovieFragment() {
         // Required empty public constructor
     }
 

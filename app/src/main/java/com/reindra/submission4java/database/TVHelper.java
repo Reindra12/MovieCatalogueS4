@@ -12,14 +12,12 @@ import com.reindra.submission4java.model.Movie;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-//import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.COUNTRY;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.DATE;
+import static com.reindra.submission4java.database.DatabaseContract.TVColumns.DATE;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_TV;
-//import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.DATE;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.OVERVIEW;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.PHOTO;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.RATING;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.TITLE;
+import static com.reindra.submission4java.database.DatabaseContract.TVColumns.OVERVIEW;
+import static com.reindra.submission4java.database.DatabaseContract.TVColumns.PHOTO;
+import static com.reindra.submission4java.database.DatabaseContract.TVColumns.RATING;
+import static com.reindra.submission4java.database.DatabaseContract.TVColumns.TITLE;
 
 public class TVHelper {
     private static final String DB_TABLE = TABLE_TV;

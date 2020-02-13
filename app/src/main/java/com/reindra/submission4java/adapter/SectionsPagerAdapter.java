@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.reindra.submission4java.R;
-import com.reindra.submission4java.fragment.FavoriteMovieFragment;
-import com.reindra.submission4java.fragment.FavoriteTVFragment;
+import com.reindra.submission4java.fragment.favorite.FavMovieFragment;
+import com.reindra.submission4java.fragment.favorite.FavTVFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;
@@ -39,10 +39,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new FavoriteMovieFragment();
+                fragment = new FavMovieFragment();
                 break;
             case 1:
-                fragment = new FavoriteTVFragment();
+                fragment = new FavTVFragment();
                 break;
             default:
         }

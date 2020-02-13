@@ -1,10 +1,5 @@
 package com.reindra.submission4java.adapter;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.reindra.submission4java.R;
-import com.reindra.submission4java.activity.DetailActivity;
 import com.reindra.submission4java.model.Movie;
 
 import java.util.ArrayList;
 
 public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
     private ArrayList<Movie> ListMovie = new ArrayList<>();
-    private Float Float;
-    private Object TVAdapter;
+
 
     public TVAdapter(ArrayList<Movie> list) {
         this.ListMovie = list;
@@ -64,7 +57,6 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
                 .load(movie.getPhoto())
                 .apply(new RequestOptions().override(350, 550))
                 .placeholder(R.drawable.img_placeholder)
-                .error(R.drawable.ic_missing)
                 .into(holder.imgPhototv);
         holder.titletv.setText(movie.getTitle());
         holder.overviewtv.setText(movie.getOverview());
