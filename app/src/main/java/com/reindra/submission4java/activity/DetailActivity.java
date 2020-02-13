@@ -112,6 +112,15 @@ public class DetailActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.fav_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    private void dialog() {
+        ViewGroup viewGroup = findViewById(R.id.content);
+        View DialogviView = LayoutInflater.from(this).inflate(R.layout.dialog, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(DialogviView);
+        final AlertDialog alertDialog = builder.create();
+        Button btnalert = DialogviView.findViewById(R.id.btnyes);
+        ImageView clear = DialogviView.findViewById(R.id.imgclear);
+        notif = DialogviView.findViewById(R.id.tvnotif);
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

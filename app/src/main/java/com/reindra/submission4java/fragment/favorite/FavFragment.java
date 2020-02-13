@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.adapter.SectionsPagerAdapter;
 
-public class FavoriteFragment extends Fragment {
+public class FavFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

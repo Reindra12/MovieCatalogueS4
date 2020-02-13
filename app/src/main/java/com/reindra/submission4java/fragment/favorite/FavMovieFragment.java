@@ -3,6 +3,7 @@ package com.reindra.submission4java.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.reindra.submission4java.R;
@@ -26,6 +28,7 @@ import com.reindra.submission4java.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -34,6 +37,7 @@ public class FavoriteMovieFragment extends Fragment {
     private MovieHelper movieHelper;
     private ArrayList<Movie>ListMovie;
     private MovieAdapter movieAdapter;
+    private LinearLayout nodata;
 
 
     public FavoriteMovieFragment() {
@@ -52,6 +56,7 @@ public class FavoriteMovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        nodata = view.findViewById(R.id.view_no_data);
         recyclerView = view.findViewById(R.id.rv_category);
         movieHelper = MovieHelper.getInstance(getContext());
         ListMovie = new ArrayList<>();
@@ -69,6 +74,14 @@ public class FavoriteMovieFragment extends Fragment {
         movieAdapter.setData(ListMovie);
         movieAdapter.notifyDataSetChanged();
 
+
+        if (ListMovie.size() > 0){
+            movieAdapter.setData(ListMovie);
+            movieAdapter.notifyDataSetChanged();
+        }else{
+            nodata.setVisibility(View.VISIBLE);
+        }
+
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(movieAdapter);
@@ -81,6 +94,8 @@ public class FavoriteMovieFragment extends Fragment {
         });
         movieHelper.close();
     }
+
+
 
     private void SelectedDataMovie(Movie movie) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
