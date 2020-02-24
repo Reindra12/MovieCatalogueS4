@@ -25,8 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.TABLE_MOVIES,
             DatabaseContract.MoviesColumns._ID,
             DatabaseContract.MoviesColumns.TITLE,
-            DatabaseContract.MoviesColumns.DATE,
-            DatabaseContract.MoviesColumns.PHOTO,
+            DatabaseContract.MoviesColumns.YEAR,
+            DatabaseContract.MoviesColumns.POSTER,
             DatabaseContract.MoviesColumns.RATING,
             DatabaseContract.MoviesColumns.OVERVIEW,
             DatabaseContract.MoviesColumns.COUNTRY
@@ -40,12 +40,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_TV,
-            DatabaseContract.TvShowColumns._ID,
-            DatabaseContract.TvShowColumns.TITLE,
-            DatabaseContract.TvShowColumns.OVERVIEW,
-            DatabaseContract.TvShowColumns.PHOTO,
-            DatabaseContract.TvShowColumns.RATING,
-            DatabaseContract.TvShowColumns.DATE
+            DatabaseContract.MoviesColumns._ID,
+            DatabaseContract.MoviesColumns.TITLE,
+            DatabaseContract.MoviesColumns.OVERVIEW,
+            DatabaseContract.MoviesColumns.POSTER,
+            DatabaseContract.MoviesColumns.RATING,
+            DatabaseContract.MoviesColumns.YEAR
     );
 
     public DatabaseHelper(Context context) {

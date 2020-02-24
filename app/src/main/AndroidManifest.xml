@@ -6,6 +6,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <permission
+        android:name="com.reindra.submission4java.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.reindra.submission4java.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,12 +22,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <provider
+            android:name=".provider.FavProvider"
+            android:authorities="com.reindra.submission4java"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.reindra.submission4java.READ_DATABASE"
+            android:writePermission="com.reindra.submission4java.WRITE_DATABASE"></provider>
         <activity android:name=".activity.TVDetailActivity" />
         <activity
             android:name=".activity.DetailActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

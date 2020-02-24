@@ -1,19 +1,20 @@
 package com.reindra.submission4java.activity;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.reindra.submission4java.R;
@@ -35,27 +36,30 @@ public class TVDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tvdetail);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        TextView toolbarText = findViewById(R.id.toolbar_text);
         progressBar = findViewById(R.id.progressBartv);
         title = findViewById(R.id.tv_tittle_detailtv);
         overview = findViewById(R.id.tv_synopsistv);
-        date = findViewById(R.id.tv_yeartv);
+        date = findViewById(R.id.tv_datetv);
         rate = findViewById(R.id.tv_score_detailtv);
         poster = findViewById(R.id.iv_poster_detailtv);
-        TextView tvCountry = findViewById(R.id.tv_country_detailtv);
         RatingBar ratingbar = findViewById(R.id.rb_scoretv);
         favorite = findViewById(R.id.iv_hearttv);
 
         movie = getIntent().getParcelableExtra(FLAG_EXTATV);
-        Intent intent = getIntent();
-        status = intent.getStringExtra("status");
-        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+//        Intent intent = getIntent();
+//        status = intent.getStringExtra("status");
+//        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
         tvHelper = TVHelper.getInstance(getApplicationContext());
         tvHelper.open();
 
         showloading(true);
         if (movie != null) {
+            toolbarText.setText(movie.getTitle());
             title.setText(movie.getTitle());
             date.setText(movie.getDate());
             Float count = Float.parseFloat(movie.getRating());
@@ -78,16 +82,14 @@ public class TVDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!tvHelper.getAllTV(movie.getId())) {
-                    favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-                    addItemTV();
-                }else{
+                    dialog();
+                } else {
                     favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     deleteItem();
                 }
             }
         });
     }
-
 
     private void showloading(boolean b) {
         if (b) {
@@ -97,46 +99,41 @@ public class TVDetailActivity extends AppCompatActivity {
         }
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fav_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+    private void dialog() {
+        ViewGroup viewGroup = findViewById(R.id.content);
+        View DialogviView = LayoutInflater.from(this).inflate(R.layout.dialog, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(DialogviView);
+        final AlertDialog alertDialog = builder.create();
+        Button btnalert = DialogviView.findViewById(R.id.btnyes);
+        ImageView clear = DialogviView.findViewById(R.id.imgclear);
+        TextView notif = DialogviView.findViewById(R.id.tvnotif);
+        notif.setText(R.string.notifadd);
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (tvHelper.getAllTV(movie.getId())) {
-            favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else if (item.getItemId() == R.id.menu_favorite) {
-            if (!tvHelper.getAllTV(this.movie.getId())) {
-                item.setIcon(R.drawable.ic_favorite);
-                addItemTV();
-            } else {
-                item.setIcon(R.drawable.ic_favorite_2);
-                deleteItem();
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(TVDetailActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
             }
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
+        });
+        btnalert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+                addItemTV();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
 
     private void addItemTV() {
         long result = tvHelper.insert(this.movie);
         if (result > 0)
-            Toast.makeText(this, "sukseskan", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "gagal", Toast.LENGTH_SHORT).show();
-
-
+            Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
+        else {
+        }
     }
 
     private void deleteItem() {
@@ -144,15 +141,14 @@ public class TVDetailActivity extends AppCompatActivity {
         if (result > 0) {
             Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         tvHelper.close();
     }
+
 }
 

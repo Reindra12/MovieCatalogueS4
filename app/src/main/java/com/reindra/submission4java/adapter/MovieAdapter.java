@@ -1,6 +1,6 @@
 package com.reindra.submission4java.adapter;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +19,19 @@ import com.reindra.submission4java.model.Movie;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private ArrayList<Movie> mData = new ArrayList<>();
     private OnItemClickCallBack onItemClickCallBack;
+    private Context context;
 
-    public MovieAdapter() {
+    public MovieAdapter(Context context) {
+        this.context = context;
+        mData = new ArrayList<>();
 
+    }
+    public ArrayList<Movie> getFavorite(){
+        return mData;
     }
 
     public interface OnItemClickCallBack {
@@ -62,9 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .load(moviesItems.getPhoto())
                 .apply(new RequestOptions().override(350, 550))
                 .placeholder(R.drawable.img_placeholder)
-                .error(R.drawable.ic_missing)
                 .into(holder.imgPhoto);
-
 
         holder.title.setText(moviesItems.getTitle());
         holder.overview.setText(moviesItems.getOverview());

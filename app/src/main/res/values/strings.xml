@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Submission4Java</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_text_1">Movie</string>
     <string name="tab_text_2">Tv Show</string>
     <string name="inspect">inspect</string>
-    <string name="title_movie">judul</string>
+    <string name="title_movie">Movie Catalogue</string>
     <string name="description">Overview</string>
     <string name="readmore">readmore</string>
     <string name="photo">photo</string>
@@ -19,7 +16,6 @@
     <string name="title">title</string>
     <string name="delete">delete</string>
     <string name="tab_text_3">Favorite</string>
-    <string name="favactivity">activity</string>
     <string name="desc_ic_heart">heart</string>
     <string name="date">Date</string>
 
@@ -35,4 +31,9 @@ Deleted Successed</string>
     <string name="score">score</string>
     <string name="empty">movie does not exist</string>
     <string name="emptytv">TV Show does not exist</string>
+    <string name="notifadd">Are you sure to add to your favorite movie?</string>
+    <string name="yes">YES</string>
+    <string name="cancel">CANCEL</string>
+    <string name="rating">rating</string>
+    <string name = "failed">failed to add</string>
 </resources>

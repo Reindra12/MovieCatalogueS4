@@ -12,14 +12,13 @@ import com.reindra.submission4java.model.Movie;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-//import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.COUNTRY;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.DATE;
+import static android.provider.ContactsContract.Contacts.Photo.PHOTO;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
+
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_TV;
-//import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.DATE;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.OVERVIEW;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.PHOTO;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.RATING;
-import static com.reindra.submission4java.database.DatabaseContract.TvShowColumns.TITLE;
 
 public class TVHelper {
     private static final String DB_TABLE = TABLE_TV;
@@ -73,7 +72,7 @@ public class TVHelper {
                 movie.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(OVERVIEW)));
                 movie.setPhoto(cursor.getString(cursor.getColumnIndexOrThrow(PHOTO)));
                 movie.setRating(cursor.getString(cursor.getColumnIndexOrThrow(RATING)));
-                movie.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
+                movie.setDate(cursor.getString(cursor.getColumnIndexOrThrow(YEAR)));
                 arrayList.add(movie);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
@@ -89,20 +88,9 @@ public class TVHelper {
         args.put(OVERVIEW, movie.getOverview());
         args.put(PHOTO, movie.getPhoto());
         args.put(RATING, movie.getRating());
-        args.put(DATE, movie.getDate());
+        args.put(YEAR, movie.getDate());
         return database.insert(DB_TABLE, null, args);
     }
-    /*public long insert(Movie movie) {
-        ContentValues args = new ContentValues();
-        args.put(_ID, movie.getId());
-        args.put(TITLE, movie.getTitle());
-        args.put(DATE, movie.getDate());
-        args.put(OVERVIEW, movie.getOverview());
-        args.put(PHOTO, movie.getPhoto());
-        args.put(RATING, movie.getRating());
-        return database.insert(DB_TABLE, null, args);
-    }*/
-
 
     public int delete(int id) {
         return database.delete(DB_TABLE, _ID + " = '" + id + "'", null);
@@ -117,6 +105,20 @@ public class TVHelper {
         }
         cursor.close();
         return exist;
+    }
+    public Cursor queryById(String id) {
+        return database.query(DB_TABLE, null, _ID + " = ?", new String[]{id}, null, null, null, null);
+    }
+
+    public Cursor query() {
+        return database.query(DB_TABLE, null, null, null, null, null, _ID + " ASC", null);
+    }
+    public long insertProv(ContentValues values) {
+        return database.insert(DB_TABLE, null, values);
+    }
+
+    public int deleteProv(String id) {
+        return database.delete(DB_TABLE, _ID + " = ?", new String[]{id});
     }
 }
 

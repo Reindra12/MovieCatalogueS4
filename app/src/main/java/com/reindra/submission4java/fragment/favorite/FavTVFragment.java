@@ -1,4 +1,4 @@
-package com.reindra.submission4java.fragment;
+package com.reindra.submission4java.fragment.favorite;
 
 
 import android.content.Context;
@@ -30,14 +30,15 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteTVFragment extends Fragment {
+public class FavTVFragment extends Fragment {
     private RecyclerView recyclerView;
     private TVAdapter tvAdapter;
     private ArrayList <Movie> list;
     private TVHelper tvHelper;
+    private LinearLayout nodata;
 
 
-    public FavoriteTVFragment() {
+    public FavTVFragment() {
         // Required empty public constructor
     }
 
@@ -52,6 +53,7 @@ public class FavoriteTVFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        nodata = view.findViewById(R.id.view_no_data);
         recyclerView = view.findViewById(R.id.rv_tv);
         tvHelper = tvHelper.getInstance(getContext());
         list = new ArrayList<>();
@@ -66,6 +68,13 @@ public class FavoriteTVFragment extends Fragment {
         list.addAll(tvHelper.getdataTV());
         tvAdapter.setData(list);
         tvAdapter.notifyDataSetChanged();
+
+        if (list.size() > 0){
+            tvAdapter.setData(list);
+            tvAdapter.notifyDataSetChanged();
+        }else{
+            nodata.setVisibility(View.VISIBLE);
+        }
 
         Context context;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

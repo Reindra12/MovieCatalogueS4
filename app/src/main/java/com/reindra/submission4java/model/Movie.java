@@ -1,9 +1,32 @@
 package com.reindra.submission4java.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
+
+import static android.provider.BaseColumns._ID;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
+import static com.reindra.submission4java.database.DatabaseContract.getColumnInt;
+import static com.reindra.submission4java.database.DatabaseContract.getColumnString;
 
 public class Movie implements Parcelable {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
     private int id;
     private String photo;
     private String title;
@@ -26,17 +49,24 @@ public class Movie implements Parcelable {
     }
 
 
-    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
-
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
+    public Movie (int id, String title, String date, String rating, String country, String overview, String photo){
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.overview = overview;
+        this.photo = photo;
+        this.country = country;
+        this.rating = rating;
+    }
+    public Movie (Cursor cursor){
+        this.id = getColumnInt(cursor, _ID);
+        this.title = getColumnString(cursor, TITLE);
+        this.date = getColumnString(cursor, YEAR);
+        this.photo = getColumnString(cursor, POSTER);
+        this.rating = getColumnString(cursor, RATING);
+        this.overview = getColumnString(cursor, OVERVIEW);
+        this.country = getColumnString(cursor, COUNTRY);
+    }
 
     public String getCountry() {
         return country;
@@ -62,7 +92,6 @@ public class Movie implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getTitle() {
         return title;
