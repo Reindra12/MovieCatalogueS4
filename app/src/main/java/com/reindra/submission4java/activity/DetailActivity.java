@@ -24,12 +24,7 @@ import com.reindra.submission4java.R;
 import com.reindra.submission4java.database.MovieHelper;
 import com.reindra.submission4java.model.Movie;
 
-<<<<<<< Updated upstream
-import static android.provider.UserDictionary.Words._ID;
-=======
-
 import static android.provider.BaseColumns._ID;
->>>>>>> Stashed changes
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
