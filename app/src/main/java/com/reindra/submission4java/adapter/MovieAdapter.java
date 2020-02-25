@@ -73,9 +73,32 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.date.setText(moviesItems.getDate());
         holder.county.setText(moviesItems.getCountry());
         Float pa = Float.parseFloat(moviesItems.getRating());
+        Movie movie = mData.get(position);
+        holder.title.setText(mData.get(position).getTitle());
+        holder.overview.setText(mData.get(position).getOverview());
+        holder.date.setText(mData.get(position).getDate());
+        holder.county.setText(mData.get(position).getCountry());
+        Float pa = Float.parseFloat(mData.get(position).getRating());
         pa = Float.valueOf(pa * 10);
         holder.rating.setText(String.format("%s%%", pa.intValue()));
         holder.ratingBar.setRating(pa / 20f);
+
+        Glide.with(holder.itemView.getContext())
+                .load(movie.getPhoto())
+                .apply(new RequestOptions().override(350, 550))
+                .placeholder(R.drawable.img_placeholder)
+                .error(R.drawable.ic_missing)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                }).into(holder.imgPhoto);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
