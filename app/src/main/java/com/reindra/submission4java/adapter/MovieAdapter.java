@@ -1,6 +1,7 @@
 package com.reindra.submission4java.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.model.Movie;
 
@@ -25,12 +31,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private OnItemClickCallBack onItemClickCallBack;
     private Context context;
 
+    public MovieAdapter() {
+
+    }
+
     public MovieAdapter(Context context) {
         this.context = context;
         mData = new ArrayList<>();
 
     }
-    public ArrayList<Movie> getFavorite(){
+
+    public MovieAdapter(ArrayList<Movie> list) {
+        this.mData = list;
+    }
+
+    public ArrayList<Movie> getFavorite() {
         return mData;
     }
 
@@ -48,10 +63,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public MovieAdapter(ArrayList<Movie> list) {
-        this.mData = list;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,18 +72,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final MovieAdapter.ViewHolder holder, int position) {
-        Movie moviesItems = mData.get(position);
-        Glide.with(holder.itemView.getContext())
-                .load(moviesItems.getPhoto())
-                .apply(new RequestOptions().override(350, 550))
-                .placeholder(R.drawable.img_placeholder)
-                .into(holder.imgPhoto);
-
-        holder.title.setText(moviesItems.getTitle());
-        holder.overview.setText(moviesItems.getOverview());
-        holder.date.setText(moviesItems.getDate());
-        holder.county.setText(moviesItems.getCountry());
-        Float pa = Float.parseFloat(moviesItems.getRating());
         Movie movie = mData.get(position);
         holder.title.setText(mData.get(position).getTitle());
         holder.overview.setText(mData.get(position).getOverview());
@@ -116,11 +115,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return mData.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView date;
         TextView id;
-        Integer idint;
         TextView overview;
         TextView rating;
         TextView county;
