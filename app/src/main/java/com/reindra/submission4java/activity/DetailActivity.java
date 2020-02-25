@@ -34,7 +34,7 @@ import static com.reindra.submission4java.database.DatabaseContract.MoviesColumn
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
 
 public class DetailActivity extends AppCompatActivity {
-    public static String FLAG_EXTRA = "flag_extra";
+    public static final String FLAG_EXTRA = "flag_extra";
     ProgressBar progressBar;
     Movie movie = new Movie();
     private MovieHelper movieHelper;
@@ -84,8 +84,8 @@ public class DetailActivity extends AppCompatActivity {
             showloading(false);
 
 
+            movieHelper.open();
             if (movieHelper.getAll(movie.getId())) {
-
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
 //                addItemToFavorite();
             }
@@ -133,21 +133,24 @@ public class DetailActivity extends AppCompatActivity {
         btnalert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movieHelper.open();
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
                 addItemToFavorite();
                 alertDialog.dismiss();
             }
         });
+        movieHelper.close();
         alertDialog.show();
     }
 
     private void deleteItem() {
         uri = Uri.parse(CONTENT_MOVIE + "/" + movie.getId());
         getContentResolver().delete(uri, null, null);
-        if (uri != null) {
+        Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+      /*  if (uri != null) {
             Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
         } else {
-        }
+        }*/
     }
 
     private void addItemToFavorite() {
@@ -163,7 +166,9 @@ public class DetailActivity extends AppCompatActivity {
         getContentResolver().insert(CONTENT_MOVIE, contentValues);
         if (contentValues != null) {
             Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
+            favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
         } else {
+            favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
         }
     }
 
