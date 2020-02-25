@@ -35,7 +35,6 @@ public class MovieHelper {
             synchronized (SQLiteOpenHelper.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new MovieHelper(context);
-
                 }
             }
 
@@ -80,21 +79,15 @@ public class MovieHelper {
         cursor.close();
         return arrayList;
     }
-    public Cursor queryById(String id) {
-        return database.query(DB_TABLE, null, _ID + " = ?", new String[]{id}, null, null, null, null);
-    }
-
-    public Cursor query() {
-        return database.query(DB_TABLE, null, null, null, null, null, _ID + " ASC", null);
-    }
 
     public long insert(Movie movie) {
         ContentValues args = new ContentValues();
         args.put(_ID, movie.getId());
+        args.put(POSTER, movie.getPhoto());
         args.put(TITLE, movie.getTitle());
         args.put(OVERVIEW, movie.getOverview());
         args.put(YEAR, movie.getDate());
-        args.put(POSTER, movie.getPhoto());
+
         args.put(RATING, movie.getRating());
         args.put(COUNTRY, movie.getCountry());
         return database.insert(DB_TABLE, null, args);
@@ -121,6 +114,14 @@ public class MovieHelper {
 
     public int deleteProv(String id) {
         return database.delete(DB_TABLE, _ID + " = ?", new String[]{id});
+    }
+
+    public Cursor queryById(String id) {
+        return database.query(DB_TABLE, null, _ID + " = ?", new String[]{id}, null, null, null, null);
+    }
+
+    public Cursor query() {
+        return database.query(DB_TABLE, null, null, null, null, null, _ID + " ASC", null);
     }
 
 }

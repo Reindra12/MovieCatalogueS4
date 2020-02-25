@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static String DATABASE_NAME = "dbmoviecatalogue";
+//    private static String DATABASE_NAME = "dbmoviecatalogue";
     private static final int DATABASE_VERSION = 1;
 
 
@@ -24,9 +24,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_MOVIES,
             DatabaseContract.MoviesColumns._ID,
+            DatabaseContract.MoviesColumns.POSTER,
             DatabaseContract.MoviesColumns.TITLE,
             DatabaseContract.MoviesColumns.YEAR,
-            DatabaseContract.MoviesColumns.POSTER,
             DatabaseContract.MoviesColumns.RATING,
             DatabaseContract.MoviesColumns.OVERVIEW,
             DatabaseContract.MoviesColumns.COUNTRY
@@ -36,19 +36,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
+                    /*" %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +*/
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_TV,
             DatabaseContract.MoviesColumns._ID,
             DatabaseContract.MoviesColumns.TITLE,
             DatabaseContract.MoviesColumns.OVERVIEW,
-            DatabaseContract.MoviesColumns.POSTER,
-            DatabaseContract.MoviesColumns.RATING,
-            DatabaseContract.MoviesColumns.YEAR
+            DatabaseContract.MoviesColumns.POSTER
+           /* DatabaseContract.TVColomns.RATING,
+            DatabaseContract.TVColomns.DATE*/
     );
 
-    public DatabaseHelper(Context context) {
+    public static String DATABASE_NAME = "dbmoviecatalogue";
+    public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

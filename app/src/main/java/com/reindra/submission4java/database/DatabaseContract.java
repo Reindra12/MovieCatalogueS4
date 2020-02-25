@@ -11,15 +11,16 @@ public class DatabaseContract {
     private static final String SCEME = "content";
 
 
-    public static String getColumnString(Cursor cursor, String column){
+    public static String getColumnString(Cursor cursor, String column) {
         return cursor.getString(cursor.getColumnIndex(column));
     }
 
-    public static int getColumnInt(Cursor cursor, String column){
+    public static int getColumnInt(Cursor cursor, String column) {
         return cursor.getInt(cursor.getColumnIndex(column));
     }
+
     public static final class MoviesColumns implements BaseColumns {
-        public static Uri CONTENT_MOVIE = new Uri.Builder().scheme(SCEME)
+        public static final Uri CONTENT_MOVIE = new Uri.Builder().scheme(SCEME)
                 .authority(AUTHORITY)
                 .appendPath(TABLE_MOVIES)
                 .build();
@@ -33,7 +34,9 @@ public class DatabaseContract {
         public static String RATING = "rating";
         public static String OVERVIEW = "overview";
         public static String COUNTRY = "country";
+
     }
+}
 
    /* public static final class TVColumns implements BaseColumns {
         public static String TITLE = "title";
@@ -43,4 +46,3 @@ public class DatabaseContract {
         public static String DATE = "date";
 
     }*/
-}
