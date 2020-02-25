@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.activity.DetailActivity;
 import com.reindra.submission4java.adapter.MovieAdapter;
-import com.reindra.submission4java.database.MovieHelper;
 import com.reindra.submission4java.model.Movie;
 
 import java.lang.ref.WeakReference;
@@ -42,8 +41,6 @@ interface LoadDataCallBack {
 
 public class FavMovieFragment extends Fragment implements LoadDataCallBack {
     private RecyclerView recyclerView;
-    private MovieHelper movieHelper;
-    private ArrayList<Movie> ListMovie;
     private MovieAdapter movieAdapter;
     private LinearLayout nodata;
     private static final String EXTRA_STATE = "extra_state";
@@ -53,10 +50,10 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_movie, container, false);
 
     }
@@ -70,10 +67,10 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
         recyclerView = view.findViewById(R.id.rv_category);
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(movieAdapter);
+
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
-        android.os.Handler handler = new android.os.Handler(handlerThread.getLooper());
+        Handler handler = new Handler(handlerThread.getLooper());
         DataObserver movieObserver = new DataObserver(handler, getContext());
 
         if (getActivity() != null) {
@@ -97,11 +94,17 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
         }
     }
 
-    private void showMovie(Movie data) {
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(EXTRA_STATE, movieAdapter.getFavorite());
+    }
+
+    private void showMovie(Movie movie) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
-        Uri uri = Uri.parse(CONTENT_MOVIE + "/" + data.getId());
+        Uri uri = Uri.parse(CONTENT_MOVIE + "/" + movie.getId());
         intent.setData(uri);
-        intent.putExtra(DetailActivity.FLAG_EXTRA, data);
+        intent.putExtra(DetailActivity.FLAG_EXTRA, movie);
         startActivity(intent);
     }
 
@@ -157,12 +160,6 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
             weakcallback = new WeakReference<>(callback);
         }
 
-        @Override
-        protected Cursor doInBackground(Void... voids) {
-            Context context = weakReference.get();
-            return context.getContentResolver().query(CONTENT_MOVIE, null, null, null, null);
-
-        }
 
         @Override
         protected void onPreExecute() {
@@ -175,12 +172,13 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
             super.onPostExecute(cursor);
             weakcallback.get().postExecute(cursor);
         }
-    }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(EXTRA_STATE, movieAdapter.getFavorite());
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+            Context context = weakReference.get();
+            return context.getContentResolver().query(CONTENT_MOVIE, null, null, null, null);
+
+        }
     }
 
 }
