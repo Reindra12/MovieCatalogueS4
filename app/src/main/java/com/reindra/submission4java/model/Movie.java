@@ -3,7 +3,6 @@ package com.reindra.submission4java.model;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
 import static android.provider.BaseColumns._ID;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
@@ -45,19 +44,30 @@ public class Movie implements Parcelable {
         country = in.readString();
     }
 
-    public Movie() {
+    public Movie(){
+
+    }
+
+    public Movie(int id, String title, String photo, String overview, String country){
+        this.id = id;
+        this.title = title;
+        this.photo = photo;
+        this.overview = overview;
+        this.date = date;
+        this.country = country;
     }
 
 
-    public Movie (int id, String title, String date, String rating, String country, String overview, String photo){
+    public Movie(int id, String photo, String title, String rating, String date, String overview){
         this.id = id;
         this.title = title;
+        this.rating = rating;
         this.date = date;
         this.overview = overview;
         this.photo = photo;
-        this.country = country;
-        this.rating = rating;
+//        this.country = country;
     }
+
     public Movie (Cursor cursor){
         this.id = getColumnInt(cursor, _ID);
         this.title = getColumnString(cursor, TITLE);
@@ -66,6 +76,32 @@ public class Movie implements Parcelable {
         this.rating = getColumnString(cursor, RATING);
         this.overview = getColumnString(cursor, OVERVIEW);
         this.country = getColumnString(cursor, COUNTRY);
+    }
+   /* public Movie (int id, String title, String date, String rating, String country, String overview, String photo){
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.rating = rating;
+        this.country = country;
+        this.overview = overview;
+        this.photo = photo;
+
+    }*/
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(photo);
+        dest.writeString(title);
+        dest.writeString(date);
+        dest.writeString(rating);
+        dest.writeString(overview);
+        dest.writeString(country);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getCountry() {
@@ -125,19 +161,4 @@ public class Movie implements Parcelable {
         this.overview = overview;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(photo);
-        dest.writeString(title);
-        dest.writeString(date);
-        dest.writeString(rating);
-        dest.writeString(overview);
-        dest.writeString(country);
-    }
 }
