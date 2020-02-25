@@ -6,16 +6,21 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.reindra.submission4java.database.DatabaseContract;
 import com.reindra.submission4java.database.MovieHelper;
 import com.reindra.submission4java.database.TVHelper;
+import com.reindra.submission4java.fragment.favorite.FavMovieFragment;
+import com.reindra.submission4java.fragment.favorite.FavTVFragment;
 
 import static com.reindra.submission4java.database.DatabaseContract.AUTHORITY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_TV;
+//import static com.reindra.submission4java.database.DatabaseContract.TVColomns.CONTENT_TV;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_MOVIES;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_TV;
 
@@ -27,6 +32,8 @@ public class FavProvider extends ContentProvider {
     private static final int TV_SHOW_ID = 4;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
+    private MovieHelper movieHelper;
+    private TVHelper tvHelper;
     static {
         sUriMatcher.addURI(AUTHORITY, TABLE_MOVIES, MOVIE);
         sUriMatcher.addURI(AUTHORITY,
@@ -36,8 +43,7 @@ public class FavProvider extends ContentProvider {
         sUriMatcher.addURI(AUTHORITY, TABLE_TV + "/#", TV_SHOW_ID);
     }
 
-    private MovieHelper movieHelper;
-    private TVHelper tvHelper;
+
 
     public FavProvider() {
 
@@ -46,10 +52,7 @@ public class FavProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         movieHelper = MovieHelper.getInstance(getContext());
-        movieHelper.open();
-
         tvHelper = TVHelper.getInstance(getContext());
-        tvHelper.open();
         return true;
     }
 
@@ -79,7 +82,7 @@ public class FavProvider extends ContentProvider {
         return cursor;
     }
 
-    @Nullable
+
     @Override
     public String getType(@NonNull Uri uri) {
         return null;
@@ -87,32 +90,48 @@ public class FavProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
+    public Uri insert( Uri uri, ContentValues contentValues) {
         Uri uri1;
         long added;
+        tvHelper.open();
+        movieHelper.open();
         switch (sUriMatcher.match(uri)) {
             case MOVIE:
                 added = movieHelper.insertProv(contentValues);
                 uri1 = Uri.parse(CONTENT_MOVIE + "/" + added);
-                getContext().getContentResolver().notifyChange(CONTENT_MOVIE, null);
+                getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(), getContext()));
+                break;
+            case TV_SHOW:
+                added = tvHelper.insertProv(contentValues);
+                uri1 = Uri.parse(CONTENT_TV + "/" + added);
+                if (getContext() != null){
+                    getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+                }
                 break;
             default:
                 throw new SQLException("Failed" + uri);
         }
-        return uri;
+        return uri1;
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        movieHelper.open();
+        tvHelper.open();
         int drop;
         switch (sUriMatcher.match(uri)) {
             case MOVIE_ID:
                 drop = movieHelper.deleteProv(uri.getLastPathSegment());
-                getContext().getContentResolver().notifyChange(CONTENT_MOVIE, null);
+                if (getContext() != null){
+                    getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(),getContext()));
+                }
+
                 break;
             case TV_SHOW_ID:
                 drop = tvHelper.deleteProv(uri.getLastPathSegment());
-                getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+               if (getContext() !=null){
+                   getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+               }
                 break;
             default:
                 drop = 0;
