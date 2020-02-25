@@ -53,7 +53,7 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+
         return inflater.inflate(R.layout.fragment_movie, container, false);
 
     }

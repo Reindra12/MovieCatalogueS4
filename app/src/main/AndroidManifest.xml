@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <permission
         android:name="com.reindra.submission4java.READ_DATABASE"
         android:protectionLevel="normal" />
