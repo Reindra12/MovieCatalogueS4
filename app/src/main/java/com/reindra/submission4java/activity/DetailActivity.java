@@ -2,7 +2,9 @@ package com.reindra.submission4java.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +24,23 @@ import com.reindra.submission4java.R;
 import com.reindra.submission4java.database.MovieHelper;
 import com.reindra.submission4java.model.Movie;
 
+import static android.provider.BaseColumns._ID;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
+
 public class DetailActivity extends AppCompatActivity {
-    public static String FLAG_EXTRA = "flag_extra";
+    public static final String FLAG_EXTRA = "flag_extra";
     ProgressBar progressBar;
     Movie movie = new Movie();
     private MovieHelper movieHelper;
     TextView title, overview, date, rate, notif, toolbarText;
     ImageView poster, favorite;
+    Uri uri;
 
 
     @SuppressLint("WrongViewCast")
@@ -52,8 +64,8 @@ public class DetailActivity extends AppCompatActivity {
 
         movie = getIntent().getParcelableExtra(FLAG_EXTRA);
 
-        movieHelper = MovieHelper.getInstance(getApplicationContext());
-        movieHelper.open();
+        movieHelper = MovieHelper.getInstance(this);
+//        movieHelper.open();
 
         showloading(true);
         if (movie != null) {
@@ -71,9 +83,11 @@ public class DetailActivity extends AppCompatActivity {
                     .into(poster);
             showloading(false);
 
+
+            movieHelper.open();
             if (movieHelper.getAll(movie.getId())) {
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-                addItemToFavorite();
+
             }
         }
         favorite.setOnClickListener(new View.OnClickListener() {
@@ -119,37 +133,45 @@ public class DetailActivity extends AppCompatActivity {
         btnalert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movieHelper.open();
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
                 addItemToFavorite();
                 alertDialog.dismiss();
             }
         });
+        movieHelper.close();
         alertDialog.show();
     }
 
     private void deleteItem() {
-        int result = movieHelper.delete(movie.getId());
-        if (result > 0) {
+        uri = Uri.parse(CONTENT_MOVIE + "/" + movie.getId());
+        getContentResolver().delete(uri, null, null);
+        Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+      /*  if (uri != null) {
             Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
         } else {
-        }
+        }*/
     }
 
     private void addItemToFavorite() {
-        long result = movieHelper.insert(this.movie);
-        if (result > 0) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, movie.getId());
+        contentValues.put(TITLE, movie.getTitle());
+        contentValues.put(YEAR, movie.getDate());
+        contentValues.put(OVERVIEW, movie.getOverview());
+        contentValues.put(POSTER, movie.getPhoto());
+        contentValues.put(RATING, movie.getRating());
+        contentValues.put(COUNTRY, movie.getCountry());
+
+        getContentResolver().insert(CONTENT_MOVIE, contentValues);
+        if (contentValues != null) {
             Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
+            favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
         } else {
+            favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        movieHelper.close();
-    }
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.godown, R.anim.godown);
