@@ -50,12 +50,7 @@ public class TVDetailActivity extends AppCompatActivity {
         favorite = findViewById(R.id.iv_hearttv);
 
         movie = getIntent().getParcelableExtra(FLAG_EXTATV);
-//        Intent intent = getIntent();
-//        status = intent.getStringExtra("status");
-//        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
-
         tvHelper = TVHelper.getInstance(getApplicationContext());
-        tvHelper.open();
 
         showloading(true);
         if (movie != null) {

@@ -87,7 +87,6 @@ public class DetailActivity extends AppCompatActivity {
             movieHelper.open();
             if (movieHelper.getAll(movie.getId())) {
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
-//                addItemToFavorite();
             }
         }
         favorite.setOnClickListener(new View.OnClickListener() {
