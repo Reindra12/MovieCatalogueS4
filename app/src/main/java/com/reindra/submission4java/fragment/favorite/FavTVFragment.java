@@ -102,6 +102,8 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
 
     private void showTV(Movie movie) {
         Intent intent = new Intent(getContext(), TVDetailActivity.class);
+        Uri uri = Uri.parse(CONTENT_TV + "/" + movie);
+        intent.setData(uri);
         intent.putExtra(TVDetailActivity.FLAG_EXTATV, movie);
         startActivity(intent);
 
@@ -144,10 +146,10 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
             this.context = context;
         }
 
-      /*  @Override
+        @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
-        }*/
+        }
     }
 
     private static class LoadDataAsync extends AsyncTask<Void, Void, Cursor> {
