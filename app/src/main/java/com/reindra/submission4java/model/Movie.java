@@ -48,24 +48,24 @@ public class Movie implements Parcelable {
 
     }
 
-    public Movie(int id, String title, String photo, String overview, String country){
-        this.id = id;
-        this.title = title;
-        this.photo = photo;
-        this.overview = overview;
-        this.date = date;
-        this.country = country;
-    }
+//    public Movie(int id, String title, String rating, String photo, String overview, String date){
+//        this.id = id;
+//        this.photo = photo;
+//        this.title = title;
+//        this.date = date;
+//        this.overview = overview;
+//        this.rating = rating;
+//    }
 
 
-    public Movie(int id, String photo, String title, String rating, String date, String overview){
+    public Movie(int id, String photo, String title, String rating, String date, String overview, String country){
         this.id = id;
         this.title = title;
         this.rating = rating;
         this.date = date;
         this.overview = overview;
         this.photo = photo;
-//        this.country = country;
+        this.country = country;
     }
 
     public Movie (Cursor cursor){
@@ -77,7 +77,7 @@ public class Movie implements Parcelable {
         this.overview = getColumnString(cursor, OVERVIEW);
         this.country = getColumnString(cursor, COUNTRY);
     }
-   /* public Movie (int id, String title, String date, String rating, String country, String overview, String photo){
+    public Movie (int id, String photo, String title, String date,  String overview, String rating){
         this.id = id;
         this.title = title;
         this.date = date;
@@ -86,7 +86,7 @@ public class Movie implements Parcelable {
         this.overview = overview;
         this.photo = photo;
 
-    }*/
+    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

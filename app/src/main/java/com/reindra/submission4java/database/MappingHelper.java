@@ -28,8 +28,8 @@ public class MappingHelper {
             String year = itemCursor.getString(itemCursor.getColumnIndexOrThrow(YEAR));
             String country = itemCursor.getString(itemCursor.getColumnIndexOrThrow(COUNTRY));
 
-            items.add(new Movie(id, photo, tittle, rating, year, overview));
-//            items.add(new Movie(id, photo, tittle));
+            items.add(new Movie(id, photo, tittle, rating, year, overview, country));
+
         }
         return items;
 
@@ -39,13 +39,15 @@ public class MappingHelper {
         ArrayList<Movie> item = new ArrayList<>();
         while (itemCursor.moveToNext()) {
             int id = itemCursor.getInt(itemCursor.getColumnIndexOrThrow(_ID));
-            String title = itemCursor.getString(itemCursor.getColumnIndexOrThrow(TITLE));
             String photo = itemCursor.getString(itemCursor.getColumnIndexOrThrow(POSTER));
-            String overview = itemCursor.getString(itemCursor.getColumnIndexOrThrow(OVERVIEW));
+            String title = itemCursor.getString(itemCursor.getColumnIndexOrThrow(TITLE));
             String date = itemCursor.getString(itemCursor.getColumnIndexOrThrow(YEAR));
+            String rating = itemCursor.getString(itemCursor.getColumnIndexOrThrow(RATING));
+            String overview = itemCursor.getString(itemCursor.getColumnIndexOrThrow(OVERVIEW));
             String country = itemCursor.getString(itemCursor.getColumnIndexOrThrow(COUNTRY));
 
-          item.add(new Movie(id, title, photo, overview, country));
+//          item.add(new Movie(id, photo, itle, date, overview,  rating, country));
+            item.add(new Movie(id, photo, title, date, overview, rating));
         }
         return item;
     }

@@ -105,7 +105,7 @@ public class FavProvider extends ContentProvider {
                 added = tvHelper.insertProv(contentValues);
                 uri1 = Uri.parse(CONTENT_TV + "/" + added);
                 if (getContext() != null){
-                    getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+                    getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObservertv(new Handler(),getContext()));
                 }
                 break;
             default:

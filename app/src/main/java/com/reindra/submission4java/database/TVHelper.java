@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.ContactsContract.Contacts.Photo.PHOTO;
+import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
@@ -73,6 +74,7 @@ public class TVHelper {
                 movie.setPhoto(cursor.getString(cursor.getColumnIndexOrThrow(PHOTO)));
                 movie.setRating(cursor.getString(cursor.getColumnIndexOrThrow(RATING)));
                 movie.setDate(cursor.getString(cursor.getColumnIndexOrThrow(YEAR)));
+                movie.setCountry(cursor.getString(cursor.getColumnIndexOrThrow(COUNTRY)));
                 arrayList.add(movie);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
@@ -89,6 +91,7 @@ public class TVHelper {
         args.put(PHOTO, movie.getPhoto());
         args.put(RATING, movie.getRating());
         args.put(YEAR, movie.getDate());
+        args.put(COUNTRY, movie.getCountry());
         return database.insert(DB_TABLE, null, args);
     }
 

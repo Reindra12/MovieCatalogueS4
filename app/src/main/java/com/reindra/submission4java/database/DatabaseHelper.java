@@ -36,16 +36,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
-                    /*" %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +*/
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_TV,
             DatabaseContract.MoviesColumns._ID,
+            DatabaseContract.MoviesColumns.POSTER,
             DatabaseContract.MoviesColumns.TITLE,
+            DatabaseContract.MoviesColumns.YEAR,
+            DatabaseContract.MoviesColumns.RATING,
             DatabaseContract.MoviesColumns.OVERVIEW,
-            DatabaseContract.MoviesColumns.POSTER
-           /* DatabaseContract.TVColomns.RATING,
-            DatabaseContract.TVColomns.DATE*/
+            DatabaseContract.MoviesColumns.COUNTRY
     );
 
     public static String DATABASE_NAME = "dbmoviecatalogue";

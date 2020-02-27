@@ -113,10 +113,5 @@ public class MovieFragment extends Fragment {
         intent.putExtra(DetailActivity.FLAG_EXTRA, movie);
         Bundle bundle = ActivityOptions.makeCustomAnimation(getActivity(), R.anim.goup, R.anim.goup).toBundle();
         getActivity().startActivity(intent, bundle);
-
-//        Intent intent = new Intent(getContext(), DetailActivity.class);
-//        intent.putExtra(DetailActivity.FLAG_EXTRA, movie);
-//        intent.putExtra("status","movie");
-//        startActivity(intent);
     }
 }

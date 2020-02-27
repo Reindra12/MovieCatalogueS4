@@ -33,11 +33,7 @@ import java.util.ArrayList;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
 import static com.reindra.submission4java.database.MappingHelper.mapCursor;
 
-interface LoadDataCallBack {
-    void preExecute();
 
-    void postExecute(Cursor cursor);
-}
 
 public class FavMovieFragment extends Fragment implements LoadDataCallBack {
     private RecyclerView recyclerView;
@@ -180,6 +176,10 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
 
         }
     }
+}
+interface LoadDataCallBack {
+    void preExecute();
 
+    void postExecute(Cursor cursor);
 }
 

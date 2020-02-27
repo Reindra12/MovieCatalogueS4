@@ -87,7 +87,6 @@ public class MovieHelper {
         args.put(TITLE, movie.getTitle());
         args.put(OVERVIEW, movie.getOverview());
         args.put(YEAR, movie.getDate());
-
         args.put(RATING, movie.getRating());
         args.put(COUNTRY, movie.getCountry());
         return database.insert(DB_TABLE, null, args);
