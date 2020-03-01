@@ -24,7 +24,6 @@ import com.reindra.submission4java.database.TVHelper;
 import com.reindra.submission4java.model.Movie;
 
 import static android.provider.BaseColumns._ID;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_TV;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
@@ -47,8 +46,8 @@ public class TVDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tvdetail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         TextView toolbarText = findViewById(R.id.toolbar_text);
         progressBar = findViewById(R.id.progressBartv);
