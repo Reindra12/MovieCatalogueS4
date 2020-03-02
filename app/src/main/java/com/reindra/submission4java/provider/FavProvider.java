@@ -102,7 +102,7 @@ public class FavProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(), getContext()));
                 break;
             case TV_SHOW:
-                added = tvHelper.insertProv(contentValues);
+                added = tvHelper.insertProvtv(contentValues);
                 uri1 = Uri.parse(CONTENT_TV + "/" + added);
                 if (getContext() != null){
                     getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObservertv(new Handler(),getContext()));

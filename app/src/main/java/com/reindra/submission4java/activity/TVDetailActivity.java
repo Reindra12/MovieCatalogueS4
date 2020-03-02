@@ -25,7 +25,7 @@ import com.reindra.submission4java.model.Movie;
 
 import static android.provider.BaseColumns._ID;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_TV;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
@@ -132,7 +132,7 @@ public class TVDetailActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-        tvHelper.close();
+//        tvHelper.close();
         alertDialog.show();
     }
 
@@ -144,7 +144,7 @@ public class TVDetailActivity extends AppCompatActivity {
         contentValues.put(OVERVIEW, movie.getOverview());
         contentValues.put(POSTER, movie.getPhoto());
         contentValues.put(RATING, movie.getRating());
-        contentValues.put(COUNTRY, movie.getCountry());
+//        contentValues.put(COUNTRY, movie.getCountry());
 
         getContentResolver().insert(CONTENT_TV, contentValues);
         if (contentValues != null) {

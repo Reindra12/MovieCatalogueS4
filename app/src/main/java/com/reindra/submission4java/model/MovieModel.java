@@ -11,9 +11,12 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.reindra.submission4java.BuildConfig;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MovieModel extends ViewModel {
     private static final String API_KEY = BuildConfig.API_KEY;
@@ -58,6 +61,45 @@ public class MovieModel extends ViewModel {
         });
     }
 
+    public void searchdatamovie(String query) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        final ArrayList<Movie> item = new ArrayList<>();
+        String url = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + query;
+
+        client.get(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    String result = new String(responseBody);
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray list = jsonObject.getJSONArray("results");
+
+                    for (int i = 0; i < list.length(); i++) {
+                        JSONObject movies = list.getJSONObject(i);
+                        Movie movie = new Movie();
+                        movie.setId(movies.getInt("id"));
+                        movie.setTitle(movies.getString("title"));
+                        movie.setRating(movies.getString("vote_average"));
+                        movie.setDate(movies.getString("release_date"));
+                        movie.setOverview(movies.getString("overview"));
+                        movie.setCountry(movies.getString("original_language"));
+                        movie.setPhoto("https://image.tmdb.org/t/p/w185" + movies.getString("poster_path"));
+                        item.add(movie);
+                    }
+                    ListMovies.postValue(item);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
+
     public LiveData<ArrayList<Movie>> getMovie() {
         return ListMovies;
 
@@ -81,7 +123,6 @@ public class MovieModel extends ViewModel {
                         items.setTitle(movie.getString("name"));
                         items.setOverview(movie.getString("overview"));
                         items.setDate(movie.getString("first_air_date"));
-                        items.setCountry(movie.getString("original_language"));
                         items.setRating(movie.getString("vote_average"));
                         items.setPhoto("https://image.tmdb.org/t/p/w185" + movie.getString("poster_path"));
                         listItems.add(items);
@@ -101,6 +142,44 @@ public class MovieModel extends ViewModel {
             }
         });
     }
+    public void searchdatatv(String query) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        final ArrayList<Movie> item = new ArrayList<>();
+        String url = " https://api.themoviedb.org/3/search/tv?api_key=" + API_KEY + "&language=en-US&query=" + query;
+
+        client.get(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    String result = new String(responseBody);
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray list = jsonObject.getJSONArray("results");
+
+                    for (int i = 0; i < list.length(); i++) {
+                        JSONObject movies = list.getJSONObject(i);
+                        Movie movie = new Movie();
+                        movie.setId(movies.getInt("id"));
+                        movie.setTitle(movies.getString("name"));
+                        movie.setOverview(movies.getString("overview"));
+                        movie.setDate(movies.getString("first_air_date"));
+                        movie.setCountry(movies.getString("original_language"));
+                        movie.setRating(movies.getString("vote_average"));
+                        movie.setPhoto("https://image.tmdb.org/t/p/w185" + movies.getString("poster_path"));
+                        item.add(movie);
+                    }
+                    ListMovies.postValue(item);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
 
     public LiveData<ArrayList<Movie>> getTV() {
         return ListMovies;

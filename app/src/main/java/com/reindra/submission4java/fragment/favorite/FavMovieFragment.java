@@ -96,6 +96,7 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
         outState.putParcelableArrayList(EXTRA_STATE, movieAdapter.getFavorite());
     }
 
+
     private void showMovie(Movie movie) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         Uri uri = Uri.parse(CONTENT_MOVIE + "/" + movie.getId());

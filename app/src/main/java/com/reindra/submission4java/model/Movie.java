@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import static android.provider.BaseColumns._ID;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
@@ -48,24 +48,15 @@ public class Movie implements Parcelable {
 
     }
 
-//    public Movie(int id, String title, String rating, String photo, String overview, String date){
-//        this.id = id;
-//        this.photo = photo;
-//        this.title = title;
-//        this.date = date;
-//        this.overview = overview;
-//        this.rating = rating;
-//    }
 
-
-    public Movie(int id, String photo, String title, String rating, String date, String overview, String country){
+    public Movie(int id, String photo, String title, String rating, String overview){
         this.id = id;
         this.title = title;
         this.rating = rating;
         this.date = date;
         this.overview = overview;
         this.photo = photo;
-        this.country = country;
+//        this.country = country;
     }
 
     public Movie (Cursor cursor){
@@ -75,16 +66,17 @@ public class Movie implements Parcelable {
         this.photo = getColumnString(cursor, POSTER);
         this.rating = getColumnString(cursor, RATING);
         this.overview = getColumnString(cursor, OVERVIEW);
-        this.country = getColumnString(cursor, COUNTRY);
+//        this.country = getColumnString(cursor, COUNTRY);
     }
+    //a
     public Movie (int id, String photo, String title, String date,  String overview, String rating){
         this.id = id;
         this.title = title;
         this.date = date;
         this.rating = rating;
-        this.country = country;
         this.overview = overview;
         this.photo = photo;
+
 
     }
 

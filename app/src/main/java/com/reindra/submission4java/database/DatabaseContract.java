@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 
 public class DatabaseContract {
     public static final String TABLE_MOVIES = "Movies";
-    public static final String TABLE_TV = "TVShow";
+    public static final String TABLE_TV = "TV";
     public static String AUTHORITY = "com.reindra.submission4java";
     private static final String SCEME = "content";
 
@@ -33,7 +33,6 @@ public class DatabaseContract {
         public static String POSTER = "photo";
         public static String RATING = "rating";
         public static String OVERVIEW = "overview";
-        public static String COUNTRY = "country";
 
     }
 }

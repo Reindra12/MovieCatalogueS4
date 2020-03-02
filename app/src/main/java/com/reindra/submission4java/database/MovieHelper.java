@@ -12,12 +12,10 @@ import com.reindra.submission4java.model.Movie;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_MOVIES;
 
 public class MovieHelper {
@@ -67,11 +65,9 @@ public class MovieHelper {
                 movie = new Movie();
                 movie.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 movie.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(TITLE)));
-                movie.setDate(cursor.getString(cursor.getColumnIndexOrThrow(YEAR)));
                 movie.setPhoto(cursor.getString(cursor.getColumnIndexOrThrow(POSTER)));
                 movie.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(OVERVIEW)));
                 movie.setRating(cursor.getString(cursor.getColumnIndexOrThrow(RATING)));
-                movie.setCountry(cursor.getString(cursor.getColumnIndexOrThrow(COUNTRY)));
                 arrayList.add(movie);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
@@ -86,9 +82,7 @@ public class MovieHelper {
         args.put(POSTER, movie.getPhoto());
         args.put(TITLE, movie.getTitle());
         args.put(OVERVIEW, movie.getOverview());
-        args.put(YEAR, movie.getDate());
         args.put(RATING, movie.getRating());
-        args.put(COUNTRY, movie.getCountry());
         return database.insert(DB_TABLE, null, args);
     }
 

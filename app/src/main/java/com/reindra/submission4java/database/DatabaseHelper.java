@@ -19,22 +19,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_MOVIES,
             DatabaseContract.MoviesColumns._ID,
             DatabaseContract.MoviesColumns.POSTER,
             DatabaseContract.MoviesColumns.TITLE,
-            DatabaseContract.MoviesColumns.YEAR,
             DatabaseContract.MoviesColumns.RATING,
-            DatabaseContract.MoviesColumns.OVERVIEW,
-            DatabaseContract.MoviesColumns.COUNTRY
+            DatabaseContract.MoviesColumns.OVERVIEW
     );
 
     private static final String SQL_CREATE_TABLE_TV_SHOW = String.format("CREATE TABLE %s"
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
@@ -46,11 +41,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.MoviesColumns.TITLE,
             DatabaseContract.MoviesColumns.YEAR,
             DatabaseContract.MoviesColumns.RATING,
-            DatabaseContract.MoviesColumns.OVERVIEW,
-            DatabaseContract.MoviesColumns.COUNTRY
+            DatabaseContract.MoviesColumns.OVERVIEW
     );
 
-    public static String DATABASE_NAME = "dbmoviecatalogue";
+    public static String DATABASE_NAME = "DICODING";
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

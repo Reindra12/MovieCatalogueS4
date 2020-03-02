@@ -21,6 +21,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".notification.ReleaseReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".notification.DailyReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.NotificationActivity"
+            android:theme="@style/generalnotitle"/>
         <provider
             android:name=".provider.FavProvider"
             android:authorities="com.reindra.submission4java"
@@ -28,13 +39,13 @@
             android:exported="true"
             android:readPermission="com.reindra.submission4java.READ_DATABASE"
             android:writePermission="com.reindra.submission4java.WRITE_DATABASE"></provider>
-        <activity android:name=".activity.TVDetailActivity" />
+        <activity android:name=".activity.TVDetailActivity"
+            android:theme="@style/generalnotitle"/>
         <activity
             android:name=".activity.DetailActivity"
-            android:configChanges="orientation|screenSize" />
+            android:theme="@style/generalnotitle" />
         <activity
-            android:name=".activity.MainActivity"
-            android:configChanges="orientation|screenSize">
+            android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

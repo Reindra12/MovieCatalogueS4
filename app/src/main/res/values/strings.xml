@@ -1,4 +1,5 @@
 <resources>
+    <string name="behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="app_name">Submission4Java</string>
     <string name="tab_text_1">Movie</string>
     <string name="tab_text_2">Tv Show</string>
@@ -36,4 +37,11 @@ Deleted Successed</string>
     <string name="cancel">CANCEL</string>
     <string name="rating">rating</string>
     <string name = "failed">failed to add</string>
+    <string name="reminder_daily">notification</string>
+    <string name="daily_message">daily_message</string>
+    <string name="reminder_daily_desc">reminder_daily_desc</string>
+    <string name="reminder_release_desc">You will get a notification</string>
+    <string name="reminderrelease">Release Today Reminder</string>
+    <string name="searchmovie">Search Movies</string>
+    <string name="searchtv">Search Tv Show</string>
 </resources>
