@@ -37,9 +37,9 @@ Hapus Sukses</string>
     <string name="cancel">TIDAK</string>
     <string name="rating">nilai</string>
     <string name = "failed">Gagal Menambahkan</string>
-    <string name="reminder_daily">notification</string>
-    <string name="daily_message">daily_message</string>
-    <string name="reminder_daily_desc">reminder_daily_desc</string>
-    <string name="reminder_release_desc">You will get a notification</string>
-    <string name="reminderrelease">Release Today Reminder</string>
+    <string name="reminder_daily">Katalog Film</string>
+    <string name="daily_message">Mari kita lihat film apa yang sedang populer saat ini!</string>
+    <string name="reminder_daily_desc">Pengingat Aplikasi</string>
+    <string name="reminder_release_desc">Notifikasi mengenai Aplikasi</string>
+    <string name="reminderrelease">Telah rilis hari ini</string>
 </resources>
