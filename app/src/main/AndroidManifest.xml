@@ -32,6 +32,17 @@
 
         <activity android:name=".activity.NotificationActivity"
             android:theme="@style/generalnotitle"/>
+        <receiver android:name=".widget.ImageMovieWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/image_banner_widget_info"/>
+        </receiver>
+        <service android:name=".widget.FavMovieFactory"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
         <provider
             android:name=".provider.FavProvider"
             android:authorities="com.reindra.submission4java"
