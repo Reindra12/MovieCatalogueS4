@@ -36,8 +36,6 @@ public class TVHelper {
             synchronized (SQLiteOpenHelper.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new TVHelper(context);
-
-
                 }
             }
         }

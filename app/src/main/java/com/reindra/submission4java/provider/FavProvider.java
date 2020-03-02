@@ -20,7 +20,6 @@ import com.reindra.submission4java.fragment.favorite.FavTVFragment;
 import static com.reindra.submission4java.database.DatabaseContract.AUTHORITY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_TV;
-//import static com.reindra.submission4java.database.DatabaseContract.TVColomns.CONTENT_TV;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_MOVIES;
 import static com.reindra.submission4java.database.DatabaseContract.TABLE_TV;
 
@@ -42,8 +41,6 @@ public class FavProvider extends ContentProvider {
         sUriMatcher.addURI(AUTHORITY, TABLE_TV, TV_SHOW);
         sUriMatcher.addURI(AUTHORITY, TABLE_TV + "/#", TV_SHOW_ID);
     }
-
-
 
     public FavProvider() {
 
@@ -81,7 +78,6 @@ public class FavProvider extends ContentProvider {
         }
         return cursor;
     }
-
 
     @Override
     public String getType(@NonNull Uri uri) {

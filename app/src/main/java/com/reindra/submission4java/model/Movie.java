@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import static android.provider.BaseColumns._ID;
-//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
@@ -48,7 +48,6 @@ public class Movie implements Parcelable {
 
     }
 
-
     public Movie(int id, String photo, String title, String rating, String overview){
         this.id = id;
         this.title = title;
@@ -56,7 +55,6 @@ public class Movie implements Parcelable {
         this.date = date;
         this.overview = overview;
         this.photo = photo;
-//        this.country = country;
     }
 
     public Movie (Cursor cursor){
@@ -66,9 +64,7 @@ public class Movie implements Parcelable {
         this.photo = getColumnString(cursor, POSTER);
         this.rating = getColumnString(cursor, RATING);
         this.overview = getColumnString(cursor, OVERVIEW);
-//        this.country = getColumnString(cursor, COUNTRY);
     }
-    //a
     public Movie (int id, String photo, String title, String date,  String overview, String rating){
         this.id = id;
         this.title = title;
@@ -76,8 +72,6 @@ public class Movie implements Parcelable {
         this.rating = rating;
         this.overview = overview;
         this.photo = photo;
-
-
     }
 
     @Override

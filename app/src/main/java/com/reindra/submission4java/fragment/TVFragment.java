@@ -171,7 +171,6 @@ public class TVFragment extends Fragment {
         intent.putExtra("status", "tv");
         startActivity(intent);
     }
-
 }
 
 

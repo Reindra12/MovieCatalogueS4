@@ -78,11 +78,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         pa = Float.valueOf(pa * 10);
         holder.rating.setText(String.format("%s%%", pa.intValue()));
         holder.ratingBar.setRating(pa / 20f);
-//        holder.date.setText(mData.get(position).getDate());
         holder.overview.setText(mData.get(position).getOverview());
-
-//        holder.county.setText(mData.get(position).getCountry());
-
 
         Glide.with(holder.itemView.getContext())
                 .load(movie.getPhoto())
@@ -101,12 +97,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         });
     }
 
-
     @Override
     public int getItemCount() {
         return mData.size();
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
@@ -115,7 +109,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView overview;
         TextView rating;
         TextView county;
-        ImageView imgPhoto, favorite;
+        ImageView imgPhoto;
         CardView cardView;
         RatingBar ratingBar;
 

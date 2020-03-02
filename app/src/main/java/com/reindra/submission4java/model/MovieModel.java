@@ -48,7 +48,6 @@ public class MovieModel extends ViewModel {
                     ListMovies.postValue(listItems);
                 } catch (Exception e) {
                     Log.d("Exception", e.getMessage());
-
                 }
             }
 
@@ -56,7 +55,6 @@ public class MovieModel extends ViewModel {
 
             public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("onFailure", error.getMessage());
-
             }
         });
     }
@@ -98,7 +96,6 @@ public class MovieModel extends ViewModel {
             }
         });
     }
-
 
     public LiveData<ArrayList<Movie>> getMovie() {
         return ListMovies;
@@ -142,6 +139,7 @@ public class MovieModel extends ViewModel {
             }
         });
     }
+
     public void searchdatatv(String query) {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> item = new ArrayList<>();

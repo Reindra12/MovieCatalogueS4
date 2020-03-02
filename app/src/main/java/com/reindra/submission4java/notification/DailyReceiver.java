@@ -29,10 +29,9 @@ public class DailyReceiver extends BroadcastReceiver {
 
     private void DailyNotification(Context context) {
         int req = 19;
-        String id = "channelFirst";
-        String name = "DailyReminder";
-        String title = context.getString(R.string.reminder_daily);
-        CharSequence message = context.getString(R.string.daily_message);
+        String id = "channel_1";
+        String name = "Daily Reminder Channel";
+//
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = TaskStackBuilder.create(context)
                 .addNextIntent(intent)
@@ -42,23 +41,23 @@ public class DailyReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_notifications_black_24dp))
-                .setContentTitle(title)
-                .setContentText(message)
+                .setContentTitle(context.getResources().getString(R.string.tab_text_1))
+                .setContentText(context.getResources().getString(R.string.daily_message))
                 .setAutoCancel(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_DEFAULT);
             builder.setChannelId(id);
 
-            if (notificationManager != null){
+            if (notificationManager != null) {
                 notificationManager.createNotificationChannel(notificationChannel);
-
             }
 
         }
-        if (notificationManager != null){
+        if (notificationManager != null) {
             notificationManager.notify(ID_DAILY, builder.build());
         }
     }
+
     public void dailyNotificationOn(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, DailyReceiver.class);
@@ -74,13 +73,13 @@ public class DailyReceiver extends BroadcastReceiver {
         }
     }
 
-    public void dailyNotifOff(Context context ){
+    public void dailyNotifOff(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, DailyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY,intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY, intent, 0);
         pendingIntent.cancel();
 
-        if (alarmManager != null){
+        if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
 

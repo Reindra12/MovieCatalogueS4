@@ -62,7 +62,6 @@ public class MovieFragment extends Fragment {
         nodata = mView.findViewById(R.id.view_no_data);
         showRecyclerView();
         return mView;
-
     }
 
     @Override
@@ -122,7 +121,6 @@ public class MovieFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 
     private void search(Menu menu) {

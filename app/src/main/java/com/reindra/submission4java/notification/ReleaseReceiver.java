@@ -9,6 +9,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.Nullable;
@@ -119,8 +121,9 @@ public class ReleaseReceiver extends BroadcastReceiver {
     }
 
     private void showAlarmNotification(Context context, String title, @Nullable String message, int notifId, @Nullable Movie item) {
-        String CHANNEL_ID = "Channel_1";
-        String CHANNEL_NAME = "AlarmManager chanel";
+        String CHANNEL_ID = "Channel_2";
+        String CHANNEL_NAME = "Today Release Channel";
+        Uri uriRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         if (movies.size() != 0) {
@@ -134,12 +137,16 @@ public class ReleaseReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                     .setContentTitle(title)
                     .setStyle(inboxStyle)
+                    .setAutoCancel(true)
+                    .setSound(uriRingtone)
                     .setColor(ContextCompat.getColor(context, android.R.color.transparent));
         } else {
             builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setAutoCancel(true)
+                    .setSound(uriRingtone)
                     .setColor(ContextCompat.getColor(context, android.R.color.transparent));
         }
 
