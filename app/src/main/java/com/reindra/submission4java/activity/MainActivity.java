@@ -1,48 +1,40 @@
 package com.reindra.submission4java.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.reindra.submission4java.R;
+import com.reindra.submission4java.fragment.MovieFragment;
+import com.reindra.submission4java.fragment.TVFragment;
+import com.reindra.submission4java.fragment.favorite.FavFragment;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView movie, tvshow;
+    FloatingActionButton favorite;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(getString(R.string.tab_text_1));
 
-      /*  TextView title = findViewById(R.id.tv_titlebar);
-        title.setText(R.string.title_movie);
-        ImageView language = findViewById(R.id.imgsetting);
-        ImageView search = findViewById(R.id.imgsearch);
-        ImageView notif = findViewById(R.id.imgnotif);*/
+        movie = findViewById(R.id.nav_movie);
+        tvshow = findViewById(R.id.nav_tv);
+        favorite = findViewById(R.id.fbfavorite);
 
-      /*  search.setOnClickListener(this);
-        notif.setOnClickListener(this);
-        language.setOnClickListener(this);*/
         movie.setOnClickListener(this);
         tvshow.setOnClickListener(this);
         favorite.setOnClickListener(this);
         loadFragment(new MovieFragment());
 
-        AppBarConfiguration appbar = new AppBarConfiguration.Builder(R.id.nav_movie, R.id.nav_tv, R.id.nav_fav)
-                .build();
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        NavController navController = Navigation.findNavController(this, R.id.nav_fragment);
-       NavigationUI.setupActionBarWithNavController(this, navController,appbar);
-        NavigationUI.setupWithNavController(navView, navController);
+    }
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -54,7 +46,6 @@ public class MainActivity extends AppCompatActivity{
         return false;
     }
 
-   /* @Override
     @Override
     public void onClick(View v) {
         Fragment fragment = null;
