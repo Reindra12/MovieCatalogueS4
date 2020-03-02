@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,7 +27,7 @@ import com.reindra.submission4java.model.Movie;
 
 import static android.provider.BaseColumns._ID;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
+//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
@@ -50,6 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         toolbarText = findViewById(R.id.toolbar_text);
         progressBar = findViewById(R.id.progressBar);
@@ -88,6 +90,7 @@ public class DetailActivity extends AppCompatActivity {
             if (movieHelper.getAll(movie.getId())) {
                 favorite.setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
             }
+
         }
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +101,10 @@ public class DetailActivity extends AppCompatActivity {
                     favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     deleteItem();
                 }
+
             }
         });
+
     }
 
     private void showloading(boolean b) {
@@ -138,8 +143,9 @@ public class DetailActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-        movieHelper.close();
+
         alertDialog.show();
+//        movieHelper.close();
     }
 
     private void deleteItem() {
@@ -160,7 +166,7 @@ public class DetailActivity extends AppCompatActivity {
         contentValues.put(OVERVIEW, movie.getOverview());
         contentValues.put(POSTER, movie.getPhoto());
         contentValues.put(RATING, movie.getRating());
-        contentValues.put(COUNTRY, movie.getCountry());
+//        contentValues.put(COUNTRY, movie.getCountry());
 
         getContentResolver().insert(CONTENT_MOVIE, contentValues);
         if (contentValues != null) {
