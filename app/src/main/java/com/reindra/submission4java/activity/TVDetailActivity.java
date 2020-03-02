@@ -132,7 +132,6 @@ public class TVDetailActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-//        tvHelper.close();
         alertDialog.show();
     }
 
@@ -144,7 +143,6 @@ public class TVDetailActivity extends AppCompatActivity {
         contentValues.put(OVERVIEW, movie.getOverview());
         contentValues.put(POSTER, movie.getPhoto());
         contentValues.put(RATING, movie.getRating());
-//        contentValues.put(COUNTRY, movie.getCountry());
 
         getContentResolver().insert(CONTENT_TV, contentValues);
         if (contentValues != null) {
