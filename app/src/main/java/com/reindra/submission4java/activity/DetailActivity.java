@@ -107,13 +107,6 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    private void showloading(boolean b) {
-        if (b) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
 
     private void dialog() {
         ViewGroup viewGroup = findViewById(R.id.content);
