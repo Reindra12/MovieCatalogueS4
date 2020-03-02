@@ -55,17 +55,32 @@ public class MainActivity extends AppCompatActivity{
     }
 
    /* @Override
+    @Override
     public void onClick(View v) {
+        Fragment fragment = null;
+
         switch (v.getId()) {
-            case R.id.imgsetting:
-                Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-                startActivity(intent);
+            case R.id.nav_movie:
+                Toast.makeText(this, "movie", Toast.LENGTH_SHORT).show();
+                fragment = new MovieFragment();
+                setTitle(getString(R.string.tab_text_1));
+                loadFragment(fragment);
                 break;
-            case R.id.imgnotif:
-                Intent search = new Intent(this, NotificationActivity.class);
-                startActivity(search);
+            case R.id.nav_tv:
+                Toast.makeText(this, "tv", Toast.LENGTH_SHORT).show();
+                fragment = new TVFragment();
+                loadFragment(fragment);
+                setTitle(getString(R.string.tab_text_2));
+                break;
+            case R.id.fbfavorite:
+                fragment = new FavFragment();
+                setTitle(getString(R.string.tab_text_3));
+                loadFragment(fragment);
+                break;
 
-
+            default:
+                break;
         }
-    }*/
+
+    }
 }
