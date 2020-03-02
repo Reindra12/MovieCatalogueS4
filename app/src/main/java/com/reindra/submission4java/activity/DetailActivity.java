@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.reindra.submission4java.R;
@@ -27,12 +25,10 @@ import com.reindra.submission4java.model.Movie;
 
 import static android.provider.BaseColumns._ID;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.CONTENT_MOVIE;
-//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
-import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String FLAG_EXTRA = "flag_extra";
@@ -49,9 +45,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         toolbarText = findViewById(R.id.toolbar_text);
         progressBar = findViewById(R.id.progressBar);
@@ -67,9 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         movie = getIntent().getParcelableExtra(FLAG_EXTRA);
 
         movieHelper = MovieHelper.getInstance(this);
-//        movieHelper.open();
 
-        showloading(true);
         if (movie != null) {
             toolbarText.setText(movie.getTitle());
             title.setText(movie.getTitle());
@@ -83,8 +74,6 @@ public class DetailActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(movie.getPhoto())
                     .into(poster);
-            showloading(false);
-
 
             movieHelper.open();
             if (movieHelper.getAll(movie.getId())) {
@@ -101,12 +90,10 @@ public class DetailActivity extends AppCompatActivity {
                     favorite.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     deleteItem();
                 }
-
             }
         });
 
     }
-
 
     private void dialog() {
         ViewGroup viewGroup = findViewById(R.id.content);
@@ -138,28 +125,21 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
-//        movieHelper.close();
     }
 
     private void deleteItem() {
         uri = Uri.parse(CONTENT_MOVIE + "/" + movie.getId());
         getContentResolver().delete(uri, null, null);
         Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
-      /*  if (uri != null) {
-            Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
-        } else {
-        }*/
     }
 
     private void addItemToFavorite() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(_ID, movie.getId());
         contentValues.put(TITLE, movie.getTitle());
-        contentValues.put(YEAR, movie.getDate());
         contentValues.put(OVERVIEW, movie.getOverview());
         contentValues.put(POSTER, movie.getPhoto());
         contentValues.put(RATING, movie.getRating());
-//        contentValues.put(COUNTRY, movie.getCountry());
 
         getContentResolver().insert(CONTENT_MOVIE, contentValues);
         if (contentValues != null) {
