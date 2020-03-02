@@ -37,11 +37,12 @@ Deleted Successed</string>
     <string name="cancel">CANCEL</string>
     <string name="rating">rating</string>
     <string name = "failed">failed to add</string>
-    <string name="reminder_daily">notification</string>
-    <string name="daily_message">daily_message</string>
-    <string name="reminder_daily_desc">reminder_daily_desc</string>
-    <string name="reminder_release_desc">You will get a notification</string>
+    <string name="reminder_daily">Movie Catalogue</string>
+    <string name="daily_message">Let\'s see what movies are populer today!</string>
+    <string name="reminder_daily_desc">Reminder Showing the Movie</string>
+    <string name="reminder_release_desc">You get a notification</string>
     <string name="reminderrelease">Release Today Reminder</string>
     <string name="searchmovie">Search Movies</string>
     <string name="searchtv">Search Tv Show</string>
+    <string name="onbackpressed">TRIPLE CLICK TO EXIT!</string>
 </resources>
