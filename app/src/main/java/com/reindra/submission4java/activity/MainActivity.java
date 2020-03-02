@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity{
       /*  search.setOnClickListener(this);
         notif.setOnClickListener(this);
         language.setOnClickListener(this);*/
+        movie.setOnClickListener(this);
+        tvshow.setOnClickListener(this);
+        favorite.setOnClickListener(this);
+        loadFragment(new MovieFragment());
 
         AppBarConfiguration appbar = new AppBarConfiguration.Builder(R.id.nav_movie, R.id.nav_tv, R.id.nav_fav)
                 .build();
