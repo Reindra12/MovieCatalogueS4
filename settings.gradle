@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':favoritemovieapps'
 rootProject.name='Submission4Java'
