@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity{
        NavigationUI.setupActionBarWithNavController(this, navController,appbar);
         NavigationUI.setupWithNavController(navView, navController);
 
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
    /* @Override
