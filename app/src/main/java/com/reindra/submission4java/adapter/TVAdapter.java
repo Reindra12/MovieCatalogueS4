@@ -95,23 +95,6 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
                         return false;
                     }
                 }).into(holder.imgPhototv);
-/*
-        Movie movie = ListMovie.get(position);
-        Glide.with(holder.itemView.getContext())
-                .load(movie.getPhoto())
-                .apply(new RequestOptions().override(350, 550))
-                .placeholder(R.drawable.img_placeholder)
-                .into(holder.imgPhototv);
-        holder.titletv.setText(movie.getTitle());
-        holder.overviewtv.setText(movie.getOverview());
-        holder.datetv.setText(movie.getDate());
-        holder.country.setText(movie.getCountry());
-
-        Float count = Float.parseFloat(movie.getRating());
-        count = Float.valueOf(count * 10);
-        holder.ratingtv.setText(String.format("%s%%", count.intValue()));
-        holder.ratingBar.setRating(count / 20f);
-       */
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
