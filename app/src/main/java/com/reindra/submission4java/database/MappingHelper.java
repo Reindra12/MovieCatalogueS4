@@ -6,7 +6,6 @@ import com.reindra.submission4java.model.Movie;
 
 import java.util.ArrayList;
 
-//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.OVERVIEW;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.POSTER;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.RATING;
@@ -41,24 +40,9 @@ public class MappingHelper {
             String date = cursoritem.getString(cursoritem.getColumnIndexOrThrow(YEAR));
             String rating = cursoritem.getString(cursoritem.getColumnIndexOrThrow(RATING));
             String overview = cursoritem.getString(cursoritem.getColumnIndexOrThrow(OVERVIEW));
-//            String country = cursoritem.getString(cursoritem.getColumnIndexOrThrow(COUNTRY));
 
-            items.add(new Movie (id, photo, title, date, overview, rating));
-        }
-        return items;
-    }
-    }
-       /* while (itemCursor.moveToNext()) {
-            int id = itemCursor.getInt(itemCursor.getColumnIndexOrThrow(_ID));
-            String photo = itemCursor.getString(itemCursor.getColumnIndexOrThrow(POSTER));
-            String title = itemCursor.getString(itemCursor.getColumnIndexOrThrow(TITLE));
-            String date = itemCursor.getString(itemCursor.getColumnIndexOrThrow(YEAR));
-            String rating = itemCursor.getString(itemCursor.getColumnIndexOrThrow(RATING));
-            String overview = itemCursor.getString(itemCursor.getColumnIndexOrThrow(OVERVIEW));
-//            String country = itemCursor.getString(itemCursor.getColumnIndexOrThrow(COUNTRY));
-
-//          item.add(new Movie(id, photo, itle, date, overview,  rating, country));
             items.add(new Movie(id, photo, title, date, overview, rating));
         }
         return items;
-    }*/
+    }
+}

@@ -36,12 +36,3 @@ public class DatabaseContract {
 
     }
 }
-
-   /* public static final class TVColumns implements BaseColumns {
-        public static String TITLE = "title";
-        public static String OVERVIEW = "overview";
-        public static String PHOTO = "photo";
-        public static String RATING = "rating";
-        public static String DATE = "date";
-
-    }*/

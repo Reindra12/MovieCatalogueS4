@@ -9,10 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
-//    private static String DATABASE_NAME = "dbmoviecatalogue";
+    public static String DATABASE_NAME = "DICODING";
     private static final int DATABASE_VERSION = 1;
-
 
     private static final String SQL_CREATE_TABLE_MOVIES = String.format("CREATE TABLE %s"
                     + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -44,7 +42,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.MoviesColumns.OVERVIEW
     );
 
-    public static String DATABASE_NAME = "DICODING";
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
