@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -102,8 +101,6 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
 
     private void showTV(Movie movie) {
         Intent intent = new Intent(getContext(), TVDetailActivity.class);
-        Uri uri = Uri.parse(CONTENT_TV + "/" + movie);
-        intent.setData(uri);
         intent.putExtra(TVDetailActivity.FLAG_EXTATV, movie);
         startActivity(intent);
 

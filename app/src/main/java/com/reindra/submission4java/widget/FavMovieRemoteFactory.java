@@ -48,31 +48,30 @@ class FavMovieRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
                         .asBitmap()
                         .load(list.get(i).getPhoto())
                         .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL ).get();
-
             } catch (Exception e) {
                 e.getMessage();
             }
             Items.add(bitmap);
         }
-        list = tvHelper.getdataTV();
-        for (int i = 0; i < list.size(); i++){
-            Bitmap bitmap = null;
-            try {
-                bitmap = Glide.with(context)
-                        .asBitmap()
-                        .load(list.get(i).getPhoto())
-                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL ).get();
-            } catch (Exception e) {
-                e.getMessage();
-            }
-            Items.add(bitmap);
-        }
-    }
+  list = tvHelper.getdataTV();
+  for (int i = 0; i <list.size(); i++){
+      Bitmap bitmap = null;
+      try {
+          bitmap = Glide.with(context)
+                  .asBitmap()
+                  .load(list.get(i).getPhoto())
+                  .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      Items.add(bitmap);
+  }
+  }
 
     @Override
     public void onDestroy() {
-        tvHelper.close();
         movieHelper.close();
+        tvHelper.close();
 
     }
 
