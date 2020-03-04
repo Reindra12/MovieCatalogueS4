@@ -1,3 +1,48 @@
 <resources>
-    <string name="app_name">favoritemovieapps</string>
+    <string name="behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="app_name">favoriteMovieApp</string>
+    <string name="tab_text_1">Movie</string>
+    <string name="tab_text_2">Tv Show</string>
+    <string name="inspect">inspect</string>
+    <string name="title_movie">Movie Catalogue</string>
+    <string name="description">Overview</string>
+    <string name="readmore">readmore</string>
+    <string name="photo">photo</string>
+    <string name="string_language">Language</string>
+    <string name="title_discover">home</string>
+    <string name="title_favorite">favorite</string>
+    <string name="title_setting">setting</string>
+
+    <string name="submit">save</string>
+    <string name="title">title</string>
+    <string name="delete">delete</string>
+    <string name="tab_text_3">Favorite</string>
+    <string name="desc_ic_heart">heart</string>
+    <string name="date">Date</string>
+
+    <string name="add"> \n has been added to Favorites</string>
+    <string name="added">\n already in favorites</string>
+    <string name="data">Not Found</string>
+    <string name="datafav">Empty</string>
+    <string name="deleteitem">
+Deleted Successed</string>
+    <string name="dialogy">YES</string>
+    <string name="dialogn">NO</string>
+    <string name="favorite">favorite</string>
+    <string name="score">score</string>
+    <string name="empty">movie does not exist</string>
+    <string name="emptytv">TV Show does not exist</string>
+    <string name="notifadd">Are you sure to add to your favorite movie?</string>
+    <string name="yes">YES</string>
+    <string name="cancel">CANCEL</string>
+    <string name="rating">rating</string>
+    <string name = "failed">failed to add</string>
+    <string name="reminder_daily">Movie Catalogue</string>
+    <string name="daily_message">Let\'s see what movies are populer today!</string>
+    <string name="reminder_daily_desc">Reminder Showing the Movie</string>
+    <string name="reminder_release_desc">You get a notification</string>
+    <string name="reminderrelease">Release Today Reminder</string>
+    <string name="searchmovie">Search Movies</string>
+    <string name="searchtv">Search Tv Show</string>
+
 </resources>
