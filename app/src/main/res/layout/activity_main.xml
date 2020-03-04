@@ -62,7 +62,6 @@
             app:layout_anchor="@+id/nav_view"
             app:srcCompat="@drawable/ic_favoritelalgi" />
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

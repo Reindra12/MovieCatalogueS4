@@ -11,7 +11,6 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.reindra.submission4java.database.DatabaseContract;
 import com.reindra.submission4java.database.MovieHelper;
 import com.reindra.submission4java.database.TVHelper;
 import com.reindra.submission4java.fragment.favorite.FavMovieFragment;
@@ -33,6 +32,7 @@ public class FavProvider extends ContentProvider {
 
     private MovieHelper movieHelper;
     private TVHelper tvHelper;
+
     static {
         sUriMatcher.addURI(AUTHORITY, TABLE_MOVIES, MOVIE);
         sUriMatcher.addURI(AUTHORITY,
@@ -86,7 +86,7 @@ public class FavProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert( Uri uri, ContentValues contentValues) {
+    public Uri insert(Uri uri, ContentValues contentValues) {
         Uri uri1;
         long added;
         tvHelper.open();
@@ -100,8 +100,8 @@ public class FavProvider extends ContentProvider {
             case TV_SHOW:
                 added = tvHelper.insertProvtv(contentValues);
                 uri1 = Uri.parse(CONTENT_TV + "/" + added);
-                if (getContext() != null){
-                    getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObservertv(new Handler(),getContext()));
+                if (getContext() != null) {
+                    getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObservertv(new Handler(), getContext()));
                 }
                 break;
             default:
@@ -118,16 +118,16 @@ public class FavProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case MOVIE_ID:
                 drop = movieHelper.deleteProv(uri.getLastPathSegment());
-                if (getContext() != null){
-                    getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(),getContext()));
+                if (getContext() != null) {
+                    getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(), getContext()));
                 }
 
                 break;
             case TV_SHOW_ID:
                 drop = tvHelper.deleteProv(uri.getLastPathSegment());
-               if (getContext() !=null){
-                   getContext().getContentResolver().notifyChange(CONTENT_TV, null);
-               }
+                if (getContext() != null) {
+                    getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+                }
                 break;
             default:
                 drop = 0;

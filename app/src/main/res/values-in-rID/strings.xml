@@ -42,4 +42,6 @@ Hapus Sukses</string>
     <string name="reminder_daily_desc">Pengingat Aplikasi</string>
     <string name="reminder_release_desc">Notifikasi mengenai Aplikasi</string>
     <string name="reminderrelease">Telah rilis hari ini</string>
+    <string name="searchmovie">Cari Film</string>
+    <string name="searchtv">Cari Tayangan TV</string>
 </resources>

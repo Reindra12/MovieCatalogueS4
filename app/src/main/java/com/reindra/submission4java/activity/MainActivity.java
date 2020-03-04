@@ -3,7 +3,6 @@ package com.reindra.submission4java.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,6 @@ import com.reindra.submission4java.fragment.favorite.FavFragment;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView movie, tvshow;
     FloatingActionButton favorite;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.nav_movie:
-                Toast.makeText(this, "movie", Toast.LENGTH_SHORT).show();
                 fragment = new MovieFragment();
                 setTitle(getString(R.string.tab_text_1));
                 loadFragment(fragment);
                 break;
             case R.id.nav_tv:
-                Toast.makeText(this, "tv", Toast.LENGTH_SHORT).show();
                 fragment = new TVFragment();
                 loadFragment(fragment);
                 setTitle(getString(R.string.tab_text_2));

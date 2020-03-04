@@ -1,7 +1,6 @@
 package com.reindra.submission4java.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.model.Movie;
 
@@ -74,7 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final MovieAdapter.ViewHolder holder, int position) {
         Movie movie = mData.get(position);
         holder.title.setText(mData.get(position).getTitle());
-          Float pa = Float.parseFloat(mData.get(position).getRating());
+        Float pa = Float.parseFloat(mData.get(position).getRating());
         pa = Float.valueOf(pa * 10);
         holder.rating.setText(String.format("%s%%", pa.intValue()));
         holder.ratingBar.setRating(pa / 20f);
@@ -85,7 +79,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .apply(new RequestOptions().override(350, 550))
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.ic_missing)
-              .into(holder.imgPhoto);
+                .into(holder.imgPhoto);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +105,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView county;
         ImageView imgPhoto;
         CardView cardView;
-        RatingBar ratingBar;
+        final RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

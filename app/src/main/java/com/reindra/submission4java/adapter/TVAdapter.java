@@ -24,7 +24,6 @@ import com.reindra.submission4java.R;
 import com.reindra.submission4java.model.Movie;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
     private ArrayList<Movie> ListMovie = new ArrayList<>();
@@ -34,6 +33,7 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
     public TVAdapter(ArrayList<Movie> list) {
         this.ListMovie = list;
     }
+
     public TVAdapter(Context context) {
         this.context = context;
         ListMovie = new ArrayList<>();
@@ -49,6 +49,7 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
         ListMovie.addAll(items);
         notifyDataSetChanged();
     }
+
     public ArrayList<Movie> getFavoritetv() {
         return ListMovie;
     }
@@ -116,7 +117,7 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
         TextView overviewtv;
         ImageView imgPhototv;
         CardView cardView;
-        RatingBar ratingBar;
+        final RatingBar ratingBar;
         TextView country;
 
         public ViewHolder(@NonNull View itemView) {

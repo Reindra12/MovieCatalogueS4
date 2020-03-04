@@ -23,12 +23,10 @@ public class MappingHelper {
             String tittle = itemCursor.getString(itemCursor.getColumnIndexOrThrow(TITLE));
             String rating = itemCursor.getString(itemCursor.getColumnIndexOrThrow(RATING));
             String overview = itemCursor.getString(itemCursor.getColumnIndexOrThrow(OVERVIEW));
-
             items.add(new Movie(id, photo, tittle, rating, overview));
 
         }
         return items;
-
     }
 
     public static ArrayList<Movie> mapCursorTV(Cursor cursoritem) {
@@ -40,7 +38,6 @@ public class MappingHelper {
             String date = cursoritem.getString(cursoritem.getColumnIndexOrThrow(YEAR));
             String rating = cursoritem.getString(cursoritem.getColumnIndexOrThrow(RATING));
             String overview = cursoritem.getString(cursoritem.getColumnIndexOrThrow(OVERVIEW));
-
             items.add(new Movie(id, photo, title, date, overview, rating));
         }
         return items;

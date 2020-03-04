@@ -23,7 +23,7 @@
             android:text="Notification!"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -32,6 +32,7 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
+            android:contentDescription="@string/desc_ic_heart"
             android:background="@drawable/ic_clear_black_24dp" />
 
     </FrameLayout>
@@ -44,7 +45,7 @@
         android:text="@string/notifadd"
         android:textAlignment="center"
         android:textColor="@color/blackSoft"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
 

@@ -35,8 +35,7 @@ public class DetailActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Movie movie = new Movie();
     private MovieHelper movieHelper;
-    TextView title, overview, date, rate, notif, toolbarText;
-    ImageView poster, favorite;
+    ImageView favorite;
     Uri uri;
 
 
@@ -46,14 +45,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        toolbarText = findViewById(R.id.toolbar_text);
+        TextView toolbarText = findViewById(R.id.toolbar_text);
         progressBar = findViewById(R.id.progressBar);
-        title = findViewById(R.id.tv_tittle_detail);
-        overview = findViewById(R.id.tv_synopsis);
-        date = findViewById(R.id.tv_date_movie);
-        rate = findViewById(R.id.tv_score_detail);
-        poster = findViewById(R.id.iv_poster_detail);
-        TextView tvCountry = findViewById(R.id.tv_country_detail);
+        TextView title = findViewById(R.id.tv_tittle_detail);
+        TextView overview = findViewById(R.id.tv_synopsis);
+        TextView date = findViewById(R.id.tv_date_movie);
+        TextView rate = findViewById(R.id.tv_score_detail);
+        ImageView poster = findViewById(R.id.iv_poster_detail);
         RatingBar ratingbar = findViewById(R.id.rb_score);
         favorite = findViewById(R.id.iv_heartdetail);
 
@@ -70,7 +68,6 @@ public class DetailActivity extends AppCompatActivity {
             rate.setText(String.format("%s%%", count.intValue()));
             ratingbar.setRating(count / 20f);
             overview.setText(movie.getOverview());
-            tvCountry.setText(movie.getCountry());
             Glide.with(this)
                     .load(movie.getPhoto())
                     .into(poster);
@@ -103,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         Button btnalert = DialogviView.findViewById(R.id.btnyes);
         ImageView clear = DialogviView.findViewById(R.id.imgclear);
-        notif = DialogviView.findViewById(R.id.tvnotif);
+        TextView notif = DialogviView.findViewById(R.id.tvnotif);
 
         notif.setText(R.string.notifadd);
 
