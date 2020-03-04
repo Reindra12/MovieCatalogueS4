@@ -71,7 +71,7 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        DataObservertv tvObserver = new DataObservertv(handler, getContext());
+        FavMovieFragment.DataObserver tvObserver = new FavMovieFragment.DataObserver(handler, getContext());
 
         if (getActivity() != null) {
             getActivity().getContentResolver().registerContentObserver(CONTENT_MOVIE, true, tvObserver);
