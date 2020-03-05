@@ -33,46 +33,28 @@ class FavMovieRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
     public void onCreate() {
         movieHelper = MovieHelper.getInstance(context);
         tvHelper = TVHelper.getInstance(context);
+        movieHelper.open();
+        tvHelper.open();
 
     }
 
     @Override
     public void onDataSetChanged() {
-        movieHelper.open();
-        tvHelper.open();
-        list = movieHelper.getAllMovies();
-        for (int i = 0; i < list.size(); i++){
+        list = movieHelper.getDataMovies();
+        for (int i = 0; i < list.size(); i++) {
             Bitmap bitmap = null;
             try {
                 bitmap = Glide.with(context)
                         .asBitmap()
                         .load(list.get(i).getPhoto())
-                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL ).get();
+                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
             } catch (Exception e) {
                 e.getMessage();
             }
+
             Items.add(bitmap);
+
         }
-  list = tvHelper.getdataTV();
-  for (int i = 0; i <list.size(); i++){
-      Bitmap bitmap = null;
-      try {
-          bitmap = Glide.with(context)
-                  .asBitmap()
-                  .load(list.get(i).getPhoto())
-                  .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      Items.add(bitmap);
-  }
-  }
-
-    @Override
-    public void onDestroy() {
-        movieHelper.close();
-        tvHelper.close();
-
     }
 
     @Override
@@ -81,14 +63,15 @@ class FavMovieRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     @Override
-    public RemoteViews getViewAt(int position) {
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_items);
-        remoteViews.setImageViewBitmap(R.id.imageView, Items.get(position));
-        Bundle bundle = new Bundle();
-        bundle.putInt(ImageMovieWidget.EXTRA_ITEM, position);
-        Intent intent = new Intent();
-        remoteViews.setOnClickFillInIntent(R.id.imageView, intent);
-        return remoteViews;
+   public RemoteViews getViewAt(int position){
+        RemoteViews remote = new RemoteViews(context.getPackageName(), R.layout.widget_items);
+        remote.setImageViewBitmap(R.id.imageView, Items.get(position));
+        Bundle extra = new Bundle();
+        extra.putInt(ImageMovieWidget.EXTRA_ITEM, position);
+        Intent intentlagi = new Intent();
+        intentlagi.putExtras(extra);
+        remote.setOnClickFillInIntent(R.id.imageView, intentlagi);
+        return remote;
 
     }
 
@@ -104,11 +87,19 @@ class FavMovieRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public boolean hasStableIds() {
         return false;
     }
+
+    @Override
+    public void onDestroy() {
+        movieHelper.close();
+        tvHelper.close();
+
+    }
+
 }

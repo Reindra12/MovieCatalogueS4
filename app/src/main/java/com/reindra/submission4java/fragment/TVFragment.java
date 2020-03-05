@@ -168,7 +168,6 @@ public class TVFragment extends Fragment {
     private void showSelectedMovie(Movie movie) {
         Intent intent = new Intent(getContext(), TVDetailActivity.class);
         intent.putExtra(TVDetailActivity.FLAG_EXTATV, movie);
-        intent.putExtra("status", "tv");
         startActivity(intent);
     }
 }

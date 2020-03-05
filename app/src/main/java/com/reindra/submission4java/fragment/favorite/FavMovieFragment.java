@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.activity.DetailActivity;
 import com.reindra.submission4java.adapter.MovieAdapter;
@@ -129,6 +130,7 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
         if (movies.size() > 0) {
             movieAdapter.setData(movies);
         } else {
+            showSnackbarMessage(getString(R.string.empty));
             nodata.setVisibility(View.VISIBLE);
         }
 
@@ -176,6 +178,9 @@ public class FavMovieFragment extends Fragment implements LoadDataCallBack {
             return context.getContentResolver().query(CONTENT_MOVIE, null, null, null, null);
 
         }
+    }
+    private void showSnackbarMessage(String message) {
+        Snackbar.make(recyclerView, message, Snackbar.LENGTH_SHORT).show();
     }
 }
 interface LoadDataCallBack {

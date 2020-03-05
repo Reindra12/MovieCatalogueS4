@@ -24,20 +24,20 @@ import static com.reindra.submission4java.database.DatabaseContract.TABLE_TV;
 
 public class FavProvider extends ContentProvider {
 
-    private static final int MOVIE = 1;
-    private static final int MOVIE_ID = 2;
-    private static final int TV_SHOW = 3;
-    private static final int TV_SHOW_ID = 4;
+
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     private MovieHelper movieHelper;
     private TVHelper tvHelper;
+    private static final int MOVIE = 1;
+    private static final int MOVIE_ID = 2;
+    private static final int TV_SHOW = 3;
+    private static final int TV_SHOW_ID = 4;
 
     static {
         sUriMatcher.addURI(AUTHORITY, TABLE_MOVIES, MOVIE);
         sUriMatcher.addURI(AUTHORITY,
-                TABLE_MOVIES + "/#",
-                MOVIE_ID);
+                TABLE_MOVIES + "/#", MOVIE_ID);
         sUriMatcher.addURI(AUTHORITY, TABLE_TV, TV_SHOW);
         sUriMatcher.addURI(AUTHORITY, TABLE_TV + "/#", TV_SHOW_ID);
     }
@@ -50,6 +50,8 @@ public class FavProvider extends ContentProvider {
     public boolean onCreate() {
         movieHelper = MovieHelper.getInstance(getContext());
         tvHelper = TVHelper.getInstance(getContext());
+        movieHelper.open();
+        tvHelper.open();
         return true;
     }
 
@@ -57,8 +59,6 @@ public class FavProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor cursor;
-        movieHelper.open();
-        tvHelper.open();
         switch (sUriMatcher.match(uri)) {
             case MOVIE:
                 cursor = movieHelper.query();
@@ -87,27 +87,22 @@ public class FavProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        Uri uri1;
         long added;
-        tvHelper.open();
-        movieHelper.open();
         switch (sUriMatcher.match(uri)) {
             case MOVIE:
                 added = movieHelper.insertProv(contentValues);
-                uri1 = Uri.parse(CONTENT_MOVIE + "/" + added);
+                uri = Uri.parse(CONTENT_MOVIE + "/" + added);
                 getContext().getContentResolver().notifyChange(CONTENT_MOVIE, new FavMovieFragment.DataObserver(new Handler(), getContext()));
                 break;
             case TV_SHOW:
                 added = tvHelper.insertProvtv(contentValues);
-                uri1 = Uri.parse(CONTENT_TV + "/" + added);
-                if (getContext() != null) {
-                    getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObservertv(new Handler(), getContext()));
-                }
+                uri = Uri.parse(CONTENT_TV + "/" + added);
+                getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObserver(new Handler(), getContext()));
                 break;
             default:
                 throw new SQLException("Failed" + uri);
         }
-        return uri1;
+        return uri;
     }
 
     @Override
@@ -126,7 +121,7 @@ public class FavProvider extends ContentProvider {
             case TV_SHOW_ID:
                 drop = tvHelper.deleteProv(uri.getLastPathSegment());
                 if (getContext() != null) {
-                    getContext().getContentResolver().notifyChange(CONTENT_TV, null);
+                    getContext().getContentResolver().notifyChange(CONTENT_TV, new FavTVFragment.DataObserver(new Handler(), getContext()));
                 }
                 break;
             default:

@@ -50,7 +50,7 @@ public class MovieHelper {
             database.close();
     }
 
-    public ArrayList<Movie> getAllMovies() {
+    public ArrayList<Movie> getDataMovies() {
         ArrayList<Movie> arrayList = new ArrayList<>();
         Cursor cursor = database.query(DB_TABLE, null, null,
                 null,

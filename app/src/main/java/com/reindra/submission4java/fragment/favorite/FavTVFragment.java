@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.reindra.submission4java.R;
 import com.reindra.submission4java.activity.TVDetailActivity;
 import com.reindra.submission4java.adapter.TVAdapter;
@@ -70,7 +71,7 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        FavMovieFragment.DataObserver tvObserver = new FavMovieFragment.DataObserver(handler, getContext());
+        FavTVFragment.DataObserver tvObserver = new FavTVFragment.DataObserver(handler, getContext());
 
         if (getActivity() != null) {
             getActivity().getContentResolver().registerContentObserver(CONTENT_MOVIE, true, tvObserver);
@@ -109,7 +110,7 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
     @Override
     public void onResume() {
         super.onResume();
-        new LoadDataAsync(getContext(), this).execute();
+        new FavTVFragment.LoadDataAsync(getContext(), this).execute();
     }
 
 
@@ -131,21 +132,8 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         if (movies.size() > 0) {
             tvAdapter.setData(movies);
         } else {
+            showSnackbarMessage(getString(R.string.empty));
             nodata.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public static class DataObservertv extends ContentObserver {
-        final Context context;
-
-        public DataObservertv(Handler handler, Context context) {
-            super(handler);
-            this.context = context;
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
         }
     }
 
@@ -176,8 +164,20 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
             return context.getContentResolver().query(CONTENT_TV, null, null, null, null);
         }
     }
-}
 
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+    }
+    private void showSnackbarMessage(String message) {
+        Snackbar.make(recyclerView, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+}
 interface LoadDataTvCallBack {
     void preExecute();
 

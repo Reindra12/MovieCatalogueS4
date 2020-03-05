@@ -20,6 +20,9 @@ import java.util.Calendar;
 
 public class DailyReceiver extends BroadcastReceiver {
     private final int ID_DAILY = 10;
+    int req = 19;
+    String id = "channel_1";
+    String name = "Daily Reminder Channel";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -28,10 +31,6 @@ public class DailyReceiver extends BroadcastReceiver {
     }
 
     private void DailyNotification(Context context) {
-        int req = 19;
-        String id = "channel_1";
-        String name = "Daily Reminder Channel";
-//
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = TaskStackBuilder.create(context)
                 .addNextIntent(intent)
@@ -42,14 +41,16 @@ public class DailyReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_notifications_black_24dp))
                 .setContentTitle(context.getResources().getString(R.string.tab_text_1))
+                .setSubText(context.getResources().getString(R.string.daily_message))
                 .setContentText(context.getResources().getString(R.string.daily_message))
                 .setAutoCancel(true);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_DEFAULT);
             builder.setChannelId(id);
 
             if (notificationManager != null) {
-                notificationManager.createNotificationChannel(notificationChannel);
+                notificationManager.createNotificationChannel(channel);
             }
 
         }

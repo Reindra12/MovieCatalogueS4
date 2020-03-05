@@ -68,7 +68,7 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        DataObservertv tvObserver = new DataObservertv(handler, getContext());
+        FavTVFragment.DataObserver tvObserver = new FavTVFragment.DataObserver(handler, getContext());
 
         if (getActivity() != null) {
             getActivity().getContentResolver().registerContentObserver(CONTENT_MOVIE, true, tvObserver);
@@ -126,10 +126,10 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         }
     }
 
-    public static class DataObservertv extends ContentObserver {
+    /*public static class DataObserver extends ContentObserver {
         final Context context;
 
-        public DataObservertv(Handler handler, Context context) {
+        public DataObserver(Handler handler, Context context) {
             super(handler);
             this.context = context;
         }
@@ -138,7 +138,7 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
         }
-    }
+    }*/
 
     private static class LoadDataAsync extends AsyncTask<Void, Void, Cursor> {
         private final WeakReference<Context> weakReference;
@@ -165,6 +165,20 @@ public class FavTVFragment extends Fragment implements LoadDataTvCallBack {
         protected Cursor doInBackground(Void... voids) {
             Context context = weakReference.get();
             return context.getContentResolver().query(CONTENT_TV, null, null, null, null);
+        }
+    }
+
+    public class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
         }
     }
 }

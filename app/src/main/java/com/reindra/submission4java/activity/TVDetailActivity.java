@@ -30,8 +30,6 @@ import static com.reindra.submission4java.database.DatabaseContract.MoviesColumn
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.TITLE;
 import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.YEAR;
 
-//import static com.reindra.submission4java.database.DatabaseContract.MoviesColumns.COUNTRY;
-
 public class TVDetailActivity extends AppCompatActivity {
 
     public static final String FLAG_EXTATV = "flag_extra";
@@ -91,15 +89,6 @@ public class TVDetailActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void showloading(boolean b) {
-        if (b) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
     private void dialog() {
         ViewGroup viewGroup = findViewById(R.id.content);
         View DialogviView = LayoutInflater.from(this).inflate(R.layout.dialog, viewGroup, false);
@@ -130,6 +119,16 @@ public class TVDetailActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
+    private void showloading(boolean b) {
+        if (b) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
     private void addItemTV() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(_ID, movie.getId());
@@ -155,13 +154,5 @@ public class TVDetailActivity extends AppCompatActivity {
         getContentResolver().delete(uri, null, null);
         Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        tvHelper.close();
-    }
-
 }
 

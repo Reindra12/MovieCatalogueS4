@@ -13,7 +13,7 @@ import com.reindra.submission4java.R;
 
 public class ImageMovieWidget extends AppWidgetProvider {
     public static final String EXTRA_ITEM = "com.reindra.submission4java.EXTRA_TEXT";
-    public static final String TOAST_ACTION = "com.reindra.submission4java.TOAST_ACTION";
+    private static final String TOAST_ACTION = "com.reindra.submission4java.TOAST_ACTION";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -40,16 +40,6 @@ public class ImageMovieWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
-
-    @Override
-    public void onEnabled(Context context) {
-
-    }
-
-    @Override
-    public void onDisabled(Context context) {
-    }
-
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -59,6 +49,15 @@ public class ImageMovieWidget extends AppWidgetProvider {
                 Toast.makeText(context, "coba" + viewIndex, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onEnabled(Context context) {
+
+    }
+
+    @Override
+    public void onDisabled(Context context) {
     }
 
 }
